@@ -16,7 +16,7 @@ public class DamageCalculatorTests
     {
         var attacker = MakeChar(atk: 20);
         var defender = MakeChar(def: 10);
-        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: false);
+        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: false, out _);
         Assert.AreEqual(30, dmg);
     }
 
@@ -25,7 +25,7 @@ public class DamageCalculatorTests
     {
         var attacker = MakeChar(atk: 5);
         var defender = MakeChar(def: 100);
-        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: false);
+        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: false, out _);
         Assert.AreEqual(1, dmg);
     }
 
@@ -35,7 +35,7 @@ public class DamageCalculatorTests
         var attacker = MakeChar(mag: 15);
         var defender = MakeChar(res: 5);
         int dmg = DamageCalculator.CalculateMagical(attacker, defender,
-            ElementType.Fire, critOverride: false);
+            ElementType.Fire, critOverride: false, out _);
         Assert.AreEqual(25, dmg);
     }
 
@@ -45,7 +45,7 @@ public class DamageCalculatorTests
         var attacker = MakeChar(mag: 20);
         var defender = MakeChar(affinity: ElementType.Nature);
         int dmg = DamageCalculator.CalculateMagical(attacker, defender,
-            ElementType.Fire, critOverride: false);
+            ElementType.Fire, critOverride: false, out _);
         Assert.AreEqual(50, dmg);
     }
 
@@ -54,8 +54,9 @@ public class DamageCalculatorTests
     {
         var attacker = MakeChar(atk: 20);
         var defender = MakeChar(def: 10);
-        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: true);
+        int dmg = DamageCalculator.CalculatePhysical(attacker, defender, critOverride: true, out bool wasCrit);
         Assert.AreEqual(45, dmg);
+        Assert.IsTrue(wasCrit); // also verify WasCritical is set
     }
 
     [Test]
@@ -64,7 +65,7 @@ public class DamageCalculatorTests
         var attacker = MakeChar(atk: 20);
         var defender = MakeChar(def: 10);
         int dmg = DamageCalculator.CalculatePhysical(attacker, defender,
-            critOverride: false, powerMultiplier: 2f);
+            critOverride: false, powerMultiplier: 2f, out _);
         Assert.AreEqual(60, dmg);
     }
 }
