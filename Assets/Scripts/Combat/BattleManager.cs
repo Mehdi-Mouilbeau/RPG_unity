@@ -26,6 +26,7 @@ public class BattleManager : MonoBehaviour
         var allChars = new List<CharacterData>(players);
         allChars.AddRange(enemies);
         _turnSystem = new TurnSystem(allChars);
+        // Note: TurnSystem publishes TurnStartedEvent for the first character in its constructor
     }
 
     public void ExecuteAction(CharacterData target, SkillSO skill = null)
@@ -37,23 +38,31 @@ public class BattleManager : MonoBehaviour
             EndCurrentTurn();
             return;
         }
+
+        // Tick status effects — may kill characters (Burn/Poison)
         StatusManager.Tick(source);
+        if (CheckBattleEnd()) return;
+
         ActionResult result = skill == null
             ? ActionResolver.ResolveBasicAttack(source, target)
             : ActionResolver.ResolveSkill(source, target, skill);
         Debug.Log(result.Description);
+
         if (CheckBattleEnd()) return;
         EndCurrentTurn();
     }
 
     public void Pass()
     {
+        // Tick status effects — may kill characters (Burn/Poison)
         StatusManager.Tick(_turnSystem.CurrentCharacter);
+        if (CheckBattleEnd()) return;
         EndCurrentTurn();
     }
 
     private void EndCurrentTurn()
     {
+        // Note: TurnSystem.NextTurn() publishes TurnStartedEvent for the next character
         _turnSystem.NextTurn();
     }
 

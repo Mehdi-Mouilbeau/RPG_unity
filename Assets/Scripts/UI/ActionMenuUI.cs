@@ -5,6 +5,9 @@ public class ActionMenuUI : MonoBehaviour
 {
     [SerializeField] private Button attackButton;
     [SerializeField] private Button passButton;
+    // Placeholder fields for Plan 2 — skills/items submenus not yet implemented
+    [SerializeField] private Button skillsButton;
+    [SerializeField] private Button itemsButton;
 
     private System.Action<BattleEndedEvent> _onBattleEnded;
 

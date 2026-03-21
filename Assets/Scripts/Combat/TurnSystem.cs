@@ -5,7 +5,6 @@ public class TurnSystem
 {
     private List<CharacterData> _order;
     private int _currentIndex;
-    private int _turnsThisRound;
 
     public CharacterData CurrentCharacter => _order[_currentIndex];
     public int TurnNumber { get; private set; } = 1;
@@ -14,7 +13,6 @@ public class TurnSystem
     {
         _order = characters.OrderByDescending(c => c.AGI).ToList();
         _currentIndex = 0;
-        _turnsThisRound = 0;
         EventBus.Publish(new TurnStartedEvent { Character = CurrentCharacter });
     }
 
@@ -22,23 +20,22 @@ public class TurnSystem
     {
         EventBus.Publish(new TurnEndedEvent { Character = CurrentCharacter });
 
-        _turnsThisRound++;
-        int aliveCount = _order.Count(c => !c.IsDead);
-
-        // A full round has elapsed when all living characters have had a turn
-        if (aliveCount > 0 && _turnsThisRound >= aliveCount)
-        {
-            TurnNumber++;
-            _turnsThisRound = 0;
-        }
-
         int steps = 0;
         do
         {
             _currentIndex = (_currentIndex + 1) % _order.Count;
             steps++;
+            // A full round has elapsed when we wrap back to index 0
+            if (_currentIndex == 0) TurnNumber++;
         }
         while (CurrentCharacter.IsDead && steps < _order.Count);
+
+        // Guard: if all characters are dead, log and return without publishing
+        if (CurrentCharacter.IsDead)
+        {
+            UnityEngine.Debug.LogWarning("TurnSystem.NextTurn: all characters are dead.");
+            return;
+        }
 
         EventBus.Publish(new TurnStartedEvent { Character = CurrentCharacter });
     }

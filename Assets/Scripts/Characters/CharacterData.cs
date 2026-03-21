@@ -27,10 +27,14 @@ public class CharacterData
     public List<SkillSO> Skills { get; } = new();
     public Dictionary<string, int> Cooldowns { get; } = new();
 
-    // Test helpers
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+    // Test/debug helpers — stripped from release builds
     private HashSet<StatusEffectType> _testImmunities = new();
     public void SetImmunity_TestOnly(StatusEffectType type) => _testImmunities.Add(type);
     public ElementType ElementalAffinity_TestOnly { set => ElementalAffinity = value; }
+#else
+    private HashSet<StatusEffectType> _testImmunities = new();
+#endif
 
     public void Initialize(string name, int hp, int mp, int atk, int def,
                            int mag, int res, int agi, int lck)
@@ -96,7 +100,9 @@ public class CharacterData
 
     public bool IsImmuneToStatus(StatusEffectType type)
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
         if (_testImmunities.Contains(type)) return true;
+#endif
         return Race != null && System.Array.Exists(Race.statusImmunities, s => s == type);
     }
 }

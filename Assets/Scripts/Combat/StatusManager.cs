@@ -58,4 +58,16 @@ public static class StatusManager
             return remaining;
         }
     }
+
+    /// <summary>Returns the default duration in turns for a given status effect type.</summary>
+    public static int GetDefaultDuration(StatusEffectType type) => type switch
+    {
+        StatusEffectType.Burn      => 3,
+        StatusEffectType.Poison    => 3,
+        StatusEffectType.Freeze    => 1,
+        StatusEffectType.Paralysis => 2,
+        StatusEffectType.Confusion => 2,
+        StatusEffectType.Shield    => 999,
+        _                          => 2
+    };
 }

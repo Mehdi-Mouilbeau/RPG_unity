@@ -49,7 +49,7 @@ public static class ActionResolver
                     float shieldValue = skill.statusEffect == StatusEffectType.Shield
                         ? target.MaxHP * 0.20f
                         : 0f;
-                    var effect = new StatusEffect(skill.statusEffect, GetDefaultDuration(skill.statusEffect), shieldValue);
+                    var effect = new StatusEffect(skill.statusEffect, StatusManager.GetDefaultDuration(skill.statusEffect), shieldValue);
                     StatusManager.Apply(target, effect);
                     result.AppliedStatus = effect;
                     result.Description = $"{target.CharacterName} est affecté par {skill.statusEffect} !";
@@ -80,14 +80,4 @@ public static class ActionResolver
         return result;
     }
 
-    private static int GetDefaultDuration(StatusEffectType type) => type switch
-    {
-        StatusEffectType.Burn      => 3,
-        StatusEffectType.Poison    => 3,
-        StatusEffectType.Freeze    => 1,
-        StatusEffectType.Paralysis => 2,
-        StatusEffectType.Confusion => 2,
-        StatusEffectType.Shield    => 999,
-        _                          => 2
-    };
 }
