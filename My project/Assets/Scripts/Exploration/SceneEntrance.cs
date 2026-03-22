@@ -25,6 +25,9 @@ public class SceneEntrance : MonoBehaviour
             session.Save();
         }
 
+        if (string.IsNullOrEmpty(targetScene)) { Debug.LogWarning("[SceneEntrance] targetScene non configuré"); return; }
+        if (SceneLoader.Instance == null) { Debug.LogError("[SceneEntrance] SceneLoader.Instance est null"); return; }
+
         SceneLoader.Instance.LoadScene(targetScene);
     }
 }

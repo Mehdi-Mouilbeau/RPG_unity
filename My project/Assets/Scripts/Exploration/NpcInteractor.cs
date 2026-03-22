@@ -27,6 +27,7 @@ public class NpcInteractor : MonoBehaviour
     {
         if (_playerNearby && Keyboard.current.eKey.wasPressedThisFrame)
         {
+            if (dialogueRunner == null) return;
             if (!dialogueRunner.IsDialogueRunning)
                 dialogueRunner.StartDialogue(dialogueNode);
         }

@@ -10,8 +10,11 @@ public class EncounterTrigger : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] private float encounterChance = 0.3f;
 
+    private bool _triggered;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_triggered) return;
         if (!other.CompareTag("Player")) return;
 
         var session = GameSession.Instance;
@@ -22,9 +25,12 @@ public class EncounterTrigger : MonoBehaviour
         var enemy = zone.GetRandomEnemy();
         if (enemy == null) return;
 
+        if (SceneLoader.Instance == null) { Debug.LogError("[EncounterTrigger] SceneLoader.Instance est null"); return; }
+
         session.PendingEncounter = new CampaignEncounter(
             new List<EnemySO> { enemy }, zone, isBoss: false);
 
+        _triggered = true;
         SceneLoader.Instance.LoadScene("Battle");
     }
 }
