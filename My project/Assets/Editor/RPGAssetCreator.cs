@@ -17,6 +17,7 @@ public static class RPGAssetCreator
         CreateRaces();
         CreateClasses();
         CreateBotBrains();
+        CreateArenaRoster();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("RPG: All starter assets created successfully!");
@@ -261,6 +262,32 @@ public static class RPGAssetCreator
             normal.difficulty = BotDifficulty.Normal;
             AssetDatabase.CreateAsset(normal, normalPath);
         }
+    }
+
+    // ────────────────────────────── ARENA ROSTER ─────────────────────────────
+
+    private static void CreateArenaRoster()
+    {
+        string path = "Assets/_Data/Arena/ArenaRoster.asset";
+        if (AssetDatabase.LoadAssetAtPath<ArenaRoster>(path) != null) return;
+
+        var roster = ScriptableObject.CreateInstance<ArenaRoster>();
+        roster.entries.Add(new ArenaRoster.RosterEntry {
+            displayName    = "Guerrier Humain",
+            characterClass = Load<ClassSO>("Assets/_Data/Classes/Guerrier.asset"),
+            characterRace  = Load<RaceSO>("Assets/_Data/Races/Humain.asset")
+        });
+        roster.entries.Add(new ArenaRoster.RosterEntry {
+            displayName    = "Mage Humain",
+            characterClass = Load<ClassSO>("Assets/_Data/Classes/Mage.asset"),
+            characterRace  = Load<RaceSO>("Assets/_Data/Races/Humain.asset")
+        });
+        roster.entries.Add(new ArenaRoster.RosterEntry {
+            displayName    = "Soigneur Humain",
+            characterClass = Load<ClassSO>("Assets/_Data/Classes/Soigneur.asset"),
+            characterRace  = Load<RaceSO>("Assets/_Data/Races/Humain.asset")
+        });
+        AssetDatabase.CreateAsset(roster, path);
     }
 
     // ─────────────────────────── HELPERS ────────────────────────────────

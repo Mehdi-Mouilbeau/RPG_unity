@@ -6,6 +6,8 @@ public class MatchManager : MonoBehaviour
     public static MatchManager Instance { get; private set; }
 
     [SerializeField] private BotBrain defaultBotBrain;
+    [SerializeField] private ArenaRoster arenaRoster;
+    private DraftSystem _draft;
 
     private List<CharacterData> _team0 = new();
     private List<CharacterData> _team1 = new();
@@ -31,6 +33,35 @@ public class MatchManager : MonoBehaviour
 
         BattleManager.Instance.StartBattle(team0, team1,
             team1IsBot ? (botBrain ?? defaultBotBrain) : null);
+    }
+
+    /// <summary>Initializes a 3v3 draft using the arena roster.</summary>
+    public void StartDraft()
+    {
+        if (arenaRoster == null) { Debug.LogError("ArenaRoster non assigné !"); return; }
+        _draft = new DraftSystem(arenaRoster.GetNames());
+    }
+
+    public DraftSystem GetDraft() => _draft;
+
+    /// <summary>Launches 3v3 combat after a completed draft.</summary>
+    public void StartArena3v3(bool team1IsBot = false, BotBrain botBrain = null)
+    {
+        if (_draft == null || !_draft.IsComplete)
+        {
+            Debug.LogError("Le draft n'est pas terminé !");
+            return;
+        }
+        var team0 = _draft.GetTeam(0).ConvertAll(n => arenaRoster.CreateCharacter(n));
+        var team1 = _draft.GetTeam(1).ConvertAll(n => arenaRoster.CreateCharacter(n));
+        team0.RemoveAll(c => c == null);
+        team1.RemoveAll(c => c == null);
+        if (team0.Count == 0 || team1.Count == 0)
+        {
+            Debug.LogError("Équipes invalides après le draft — vérifiez l'ArenaRoster");
+            return;
+        }
+        StartArena(team0, team1, team1IsBot, botBrain);
     }
 
     /// <returns>0 = P1, 1 = P2, -1 = bot</returns>
