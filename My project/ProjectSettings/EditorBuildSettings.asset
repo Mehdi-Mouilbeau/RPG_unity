@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 4c00c5ce32e99974a9d5271d76a26077
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelect.unity
+    guid: 95353d83e47ece54fbae8a8bc4af505b
+  - enabled: 1
+    path: Assets/Scenes/WorldMap.unity
+    guid: b404684453b244e4bb2a6855f381b379
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: 827c047c89ea95e4d99020317659337f
+  - enabled: 1
+    path: Assets/Scenes/Donjon.unity
+    guid: e4e629c829ef37641b5a0e34f6153c62
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_UseUCBPForAssetBundles: 0

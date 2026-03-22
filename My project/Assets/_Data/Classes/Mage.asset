@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
+  m_Name: Mage
+  m_EditorClassIdentifier: RPG.Runtime::ClassSO
+  className: Mage
+  role: 0
+  description: "Lanceur de sorts \xE9l\xE9mentaires. Sp\xE9: \xC9l\xE9mentaliste
+    / Arcaniste."
+  baseHP: 70
+  baseMP: 80
+  baseATK: 5
+  baseDEF: 6
+  baseMAG: 16
+  baseRES: 12
+  baseAGI: 11
+  baseLCK: 8
+  hpGrowth: 10
+  mpGrowth: 12
+  atkGrowth: 1
+  defGrowth: 1
+  magGrowth: 4
+  resGrowth: 2
+  agiGrowth: 1
+  lckGrowth: 1
+  elementalAffinity: 1
+  startingSkills:
+  - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
+  - {fileID: 11400000, guid: 4dd2fdd74d6bae74b91b2d8a428306d6, type: 2}
+  - {fileID: 11400000, guid: f80da9ee6ecb34c46b5550ae491fef3f, type: 2}

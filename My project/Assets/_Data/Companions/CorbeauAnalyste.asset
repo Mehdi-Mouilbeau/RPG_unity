@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b08fa52e0023bf45bbb42bf9801f78f, type: 3}
+  m_Name: CorbeauAnalyste
+  m_EditorClassIdentifier: RPG.Runtime::CompanionSO
+  companionName: Corbeau Analyste
+  description: Un corbeau intelligent qui analyse et perturbe les ennemis.
+  type: 3
+  skills:
+  - {fileID: 11400000, guid: 62464d384f9434d41bbc664cfb1d3fae, type: 2}
+  - {fileID: 11400000, guid: eda8733b8c1c9c149bcdb0298e137abc, type: 2}
+  - {fileID: 11400000, guid: 2af6376fe762e3840963543200651425, type: 2}

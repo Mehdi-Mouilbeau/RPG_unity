@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: BatonArcanique
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: "B\xE2ton Arcanique"
+  description: "Un b\xE2ton charg\xE9 de puissance magique."
+  slot: 0
+  rarity: 0
+  hpBonus: 0
+  mpBonus: 10
+  atkBonus: 0
+  defBonus: 0
+  magBonus: 7
+  resBonus: 0
+  agiBonus: 0
+  lckBonus: 0
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - CristalArcanique
+  - BoisDur
+  craftingGoldCost: 90
+  effectPool:
+  - mag_4
+  - mp_regen
+  - crit_5

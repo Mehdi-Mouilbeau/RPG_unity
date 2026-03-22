@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: EpeeEnFer
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: "\xC9p\xE9e en Fer"
+  description: "Une lame solide, taill\xE9e pour le combat."
+  slot: 0
+  rarity: 0
+  hpBonus: 0
+  mpBonus: 0
+  atkBonus: 6
+  defBonus: 0
+  magBonus: 0
+  resBonus: 0
+  agiBonus: 0
+  lckBonus: 0
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - FerBrut
+  - Charbon
+  craftingGoldCost: 80
+  effectPool:
+  - atk_3
+  - crit_5
+  - damage_on_hit

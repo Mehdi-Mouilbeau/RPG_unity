@@ -1,0 +1,166 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d63a91ff5e6b01440a47ff5879e977bd, type: 3}
+  m_Name: GuerrierSkillTree
+  m_EditorClassIdentifier: RPG.Runtime::SkillTreeSO
+  characterClass: {fileID: 0}
+  specAName: Chevalier
+  specBName: Berserker
+  nodes:
+  - nodeId: g_coup_puissant
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 1
+    branch: 0
+    prerequisiteNodeIds: []
+  - nodeId: g_cri_de_guerre
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 2
+    branch: 0
+    prerequisiteNodeIds:
+    - g_coup_puissant
+  - nodeId: g_posture_de_garde
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 3
+    branch: 0
+    prerequisiteNodeIds:
+    - g_coup_puissant
+  - nodeId: g_attaque_en_chaine
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 5
+    branch: 0
+    prerequisiteNodeIds:
+    - g_cri_de_guerre
+  - nodeId: g_endurance
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 7
+    branch: 0
+    prerequisiteNodeIds:
+    - g_posture_de_garde
+  - nodeId: c_bouclier_sacre
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 10
+    branch: 1
+    prerequisiteNodeIds:
+    - g_endurance
+  - nodeId: c_mur_de_fer
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 11
+    branch: 1
+    prerequisiteNodeIds:
+    - c_bouclier_sacre
+  - nodeId: c_frappe_divine
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 12
+    branch: 1
+    prerequisiteNodeIds:
+    - c_bouclier_sacre
+  - nodeId: c_benediction
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 14
+    branch: 1
+    prerequisiteNodeIds:
+    - c_frappe_divine
+  - nodeId: c_aura_de_lumiere
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 16
+    branch: 1
+    prerequisiteNodeIds:
+    - c_benediction
+  - nodeId: c_armure_sacree
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 18
+    branch: 1
+    prerequisiteNodeIds:
+    - c_mur_de_fer
+  - nodeId: c_jugement
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 22
+    branch: 1
+    prerequisiteNodeIds:
+    - c_aura_de_lumiere
+  - nodeId: c_paladin_divin
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 27
+    branch: 1
+    prerequisiteNodeIds:
+    - c_jugement
+    - c_armure_sacree
+  - nodeId: b_rage
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 10
+    branch: 2
+    prerequisiteNodeIds:
+    - g_attaque_en_chaine
+  - nodeId: b_peau_epaisse
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 11
+    branch: 2
+    prerequisiteNodeIds:
+    - b_rage
+  - nodeId: "b_fren\xE9sie"
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 12
+    branch: 2
+    prerequisiteNodeIds:
+    - b_rage
+  - nodeId: b_cri_primitif
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 14
+    branch: 2
+    prerequisiteNodeIds:
+    - "b_fren\xE9sie"
+  - nodeId: b_instinct_de_tueur
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 16
+    branch: 2
+    prerequisiteNodeIds:
+    - "b_fren\xE9sie"
+  - nodeId: b_pouls_de_guerre
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 18
+    branch: 2
+    prerequisiteNodeIds:
+    - b_peau_epaisse
+  - nodeId: b_carnage
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 22
+    branch: 2
+    prerequisiteNodeIds:
+    - b_instinct_de_tueur
+  - nodeId: b_avatar_du_chaos
+    skill: {fileID: 0}
+    pointCost: 1
+    unlockLevel: 27
+    branch: 2
+    prerequisiteNodeIds:
+    - b_carnage
+    - b_pouls_de_guerre

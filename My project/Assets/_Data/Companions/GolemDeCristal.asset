@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b08fa52e0023bf45bbb42bf9801f78f, type: 3}
+  m_Name: GolemDeCristal
+  m_EditorClassIdentifier: RPG.Runtime::CompanionSO
+  companionName: Golem de Cristal
+  description: "Un gardien de cristal qui prot\xE8ge ses alli\xE9s."
+  type: 1
+  skills:
+  - {fileID: 11400000, guid: 073215d9f960a1747b8d71d2cdaa7d11, type: 2}
+  - {fileID: 11400000, guid: fac53904c3a029846b9dd41b188b87d3, type: 2}
+  - {fileID: 11400000, guid: e84112de39f155a4e8d50480d8744809, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa44ddd17c6f854fac9eec7c107194d, type: 3}
+  m_Name: ArenaRoster
+  m_EditorClassIdentifier: RPG.Runtime::ArenaRoster
+  entries:
+  - displayName: Guerrier Humain
+    characterClass: {fileID: 11400000, guid: c4649a51b507b9943ae11c5d05d062e7, type: 2}
+    characterRace: {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}
+  - displayName: Mage Humain
+    characterClass: {fileID: 11400000, guid: f1c861a4545206a498261779981bb476, type: 2}
+    characterRace: {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}
+  - displayName: Soigneur Humain
+    characterClass: {fileID: 11400000, guid: f08b2c4f529aae2408cb0ab2f0e6ab37, type: 2}
+    characterRace: {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: CasqueEnCuir
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: Casque en Cuir
+  description: "Un casque l\xE9ger en cuir tann\xE9."
+  slot: 2
+  rarity: 0
+  hpBonus: 15
+  mpBonus: 0
+  atkBonus: 0
+  defBonus: 2
+  magBonus: 0
+  resBonus: 1
+  agiBonus: 0
+  lckBonus: 0
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - CuirBrut
+  craftingGoldCost: 40
+  effectPool:
+  - def_2
+  - res_2
+  - hp_regen

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
+  m_Name: Guerrier
+  m_EditorClassIdentifier: RPG.Runtime::ClassSO
+  className: Guerrier
+  role: 0
+  description: "Combattant physique robuste. Sp\xE9: Berserker / Chevalier."
+  baseHP: 120
+  baseMP: 30
+  baseATK: 14
+  baseDEF: 12
+  baseMAG: 5
+  baseRES: 8
+  baseAGI: 9
+  baseLCK: 6
+  hpGrowth: 18
+  mpGrowth: 4
+  atkGrowth: 3
+  defGrowth: 2
+  magGrowth: 1
+  resGrowth: 1
+  agiGrowth: 1
+  lckGrowth: 1
+  elementalAffinity: 0
+  startingSkills:
+  - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
+  - {fileID: 11400000, guid: 082b70cbc8dd69844b156caf7177044d, type: 2}

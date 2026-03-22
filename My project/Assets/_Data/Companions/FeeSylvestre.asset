@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b08fa52e0023bf45bbb42bf9801f78f, type: 3}
+  m_Name: FeeSylvestre
+  m_EditorClassIdentifier: RPG.Runtime::CompanionSO
+  companionName: "F\xE9e Sylvestre"
+  description: "Une f\xE9e des bois dot\xE9e de pouvoirs de gu\xE9rison."
+  type: 2
+  skills:
+  - {fileID: 11400000, guid: 12a6f9589104c4746aa9c5e95727f816, type: 2}
+  - {fileID: 11400000, guid: 83b3e6a4910258f4e9388541552f2436, type: 2}
+  - {fileID: 11400000, guid: 3073597b223ec2941ac684a56d304c99, type: 2}

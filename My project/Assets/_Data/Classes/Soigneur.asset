@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
+  m_Name: Soigneur
+  m_EditorClassIdentifier: RPG.Runtime::ClassSO
+  className: Soigneur
+  role: 2
+  description: "Soutien vital, soins et r\xE9surrection. Sp\xE9: Pr\xEAtre / Chaman."
+  baseHP: 90
+  baseMP: 100
+  baseATK: 7
+  baseDEF: 8
+  baseMAG: 14
+  baseRES: 14
+  baseAGI: 8
+  baseLCK: 7
+  hpGrowth: 12
+  mpGrowth: 15
+  atkGrowth: 1
+  defGrowth: 2
+  magGrowth: 3
+  resGrowth: 2
+  agiGrowth: 1
+  lckGrowth: 1
+  elementalAffinity: 5
+  startingSkills:
+  - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
+  - {fileID: 11400000, guid: 6b463ad9dfc114e4cb43cd6881d607dd, type: 2}
+  - {fileID: 11400000, guid: e0b03c3ee206b404c827c4b6eefa19e5, type: 2}
