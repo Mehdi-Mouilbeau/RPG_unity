@@ -79,8 +79,8 @@ public class CharacterData
     /// <summary>Resets skill tree and refunds points. Returns false if gold is insufficient.</summary>
     public bool ResetSkillTree(int gold, out int goldCost)
     {
-        goldCost = _skillTreeState?.GetResetCost(Level) ?? 0;
-        if (_skillTreeState == null) return false;
+        if (_skillTreeState == null) { goldCost = 0; return false; }
+        goldCost = _skillTreeState.GetResetCost(Level);
         if (gold < goldCost) return false;
 
         int refund = _skillTreeState.GetUnlockedCount();
