@@ -36,6 +36,59 @@ public class CharacterData
     private Inventory _inventory;
     public Inventory Inventory => _inventory ??= new Inventory(this);
 
+    // ── Progression ───────────────────────────────────────────────────────
+    public int Experience { get; private set; }
+    public int SkillPoints { get; private set; }
+
+    private SkillTreeState _skillTreeState;
+    public SkillTreeState SkillTree => _skillTreeState;
+
+    public void InitSkillTree(SkillTreeSO tree)
+    {
+        _skillTreeState = new SkillTreeState(tree);
+    }
+
+    public void GainXP(int amount)
+    {
+        if (amount <= 0) return;
+        if (XPSystem.IsMaxLevel(Level)) return;
+
+        int oldLevel = Level;
+        Experience += amount;
+        int newLevel = XPSystem.GetLevel(Experience);
+        if (newLevel > oldLevel)
+        {
+            int gained = newLevel - oldLevel;
+            Level = newLevel;
+            SkillPoints += gained;
+            EventBus.Publish(new LevelUpEvent { Character = this, NewLevel = Level, SkillPointsGained = gained });
+        }
+    }
+
+    public bool SpendSkillPoint(string nodeId)
+    {
+        if (SkillPoints <= 0) return false;
+        if (_skillTreeState == null) return false;
+        if (!_skillTreeState.CanUnlock(nodeId, Level)) return false;
+
+        bool ok = _skillTreeState.Unlock(nodeId, Level);
+        if (ok) SkillPoints--;
+        return ok;
+    }
+
+    /// <summary>Resets skill tree and refunds points. Returns false if gold is insufficient.</summary>
+    public bool ResetSkillTree(int gold, out int goldCost)
+    {
+        goldCost = _skillTreeState?.GetResetCost(Level) ?? 0;
+        if (_skillTreeState == null) return false;
+        if (gold < goldCost) return false;
+
+        int refund = _skillTreeState.GetUnlockedCount();
+        _skillTreeState.Reset();
+        SkillPoints += refund;
+        return true;
+    }
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
     private HashSet<StatusEffectType> _testImmunities = new();
     public void SetImmunity_TestOnly(StatusEffectType type) => _testImmunities.Add(type);
