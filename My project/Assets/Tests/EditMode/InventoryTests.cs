@@ -109,4 +109,22 @@ public class InventoryTests
         var c = MakeCharacter();
         Assert.AreEqual(0, c.Inventory.GetTotalHP());
     }
+
+    [Test]
+    public void Equip_PublishesItemEquippedEvent()
+    {
+        var c     = MakeCharacter();
+        var sword = MakeItem(EquipmentSlot.MainWeapon, atkBonus: 5);
+
+        ItemEquippedEvent? received = null;
+        System.Action<ItemEquippedEvent> handler = e => received = e;
+        EventBus.Subscribe<ItemEquippedEvent>(handler);
+
+        c.Inventory.Equip(sword);
+
+        EventBus.Unsubscribe<ItemEquippedEvent>(handler);
+
+        Assert.IsNotNull(received);
+        Assert.AreEqual(sword, received?.Item);
+    }
 }

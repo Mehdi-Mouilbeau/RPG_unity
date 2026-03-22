@@ -40,8 +40,6 @@ public class CharacterData
     private HashSet<StatusEffectType> _testImmunities = new();
     public void SetImmunity_TestOnly(StatusEffectType type) => _testImmunities.Add(type);
     public ElementType ElementalAffinity_TestOnly { set => ElementalAffinity = value; }
-#else
-    private HashSet<StatusEffectType> _testImmunities = new();
 #endif
 
     public void Initialize(string name, int hp, int mp, int atk, int def,

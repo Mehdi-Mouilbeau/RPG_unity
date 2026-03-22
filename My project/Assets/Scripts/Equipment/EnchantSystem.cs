@@ -65,6 +65,7 @@ public static class EnchantSystem
             {
                 effectId    = pool[idx],
                 displayName = pool[idx],
+                // TODO Plan 4: resolve effectType and value from an effect registry keyed by effectId.
                 effectType  = EquipmentEffectType.None,
             });
             pool.RemoveAt(idx);
