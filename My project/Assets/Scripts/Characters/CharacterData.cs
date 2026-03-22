@@ -89,6 +89,31 @@ public class CharacterData
         return true;
     }
 
+    // ── Compagnon ─────────────────────────────────────────────────────────
+    private CompanionInstance _companion;
+    public CompanionInstance Companion => _companion;
+
+    public void AssignCompanion(CompanionSO companionSO)
+    {
+        _companion = companionSO != null ? new CompanionInstance(companionSO) : null;
+    }
+
+    public CompanionActionResult UseCompanionSkill(
+        CompanionSkillSO skill,
+        CharacterData primaryTarget,
+        CharacterData[] allies,
+        CharacterData[] enemies)
+    {
+        if (_companion == null)
+            return new CompanionActionResult { Success = false, Message = "Aucun compagnon assigné." };
+        return CompanionSystem.Execute(_companion, skill, this, primaryTarget, allies, enemies);
+    }
+
+    public void TickCompanionCooldowns()
+    {
+        _companion?.TickCooldowns();
+    }
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
     private HashSet<StatusEffectType> _testImmunities = new();
     public void SetImmunity_TestOnly(StatusEffectType type) => _testImmunities.Add(type);
