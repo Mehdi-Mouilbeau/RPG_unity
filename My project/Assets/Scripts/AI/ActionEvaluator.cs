@@ -27,4 +27,42 @@ public static class ActionEvaluator
 
         return new BotAction(target);
     }
+
+    /// <summary>Normal: soigne allié < 30% HP, exploite élémentaire, cible HP le plus bas.</summary>
+    public static BotAction EvaluateNormal(CharacterData actor,
+        List<CharacterData> allies, List<CharacterData> enemies)
+    {
+        if (actor == null) return null;
+
+        var aliveEnemies = enemies.Where(e => !e.IsDead).ToList();
+        var aliveAllies  = allies.Where(a => !a.IsDead).ToList();
+        if (aliveEnemies.Count == 0) return null;
+
+        var usable = actor.Skills
+            .Where(s => s != null
+                && actor.CurrentMP >= s.mpCost
+                && actor.GetCooldown(s) == 0)
+            .ToList();
+
+        // Priority 1: heal ally < 30% HP
+        var dyingAlly = aliveAllies
+            .FirstOrDefault(a => a != actor && (float)a.CurrentHP / a.MaxHP < 0.30f);
+        if (dyingAlly != null)
+        {
+            var heal = usable.FirstOrDefault(s => s.damageType == SkillDamageType.Healing);
+            if (heal != null) return new BotAction(dyingAlly, heal);
+        }
+
+        // Priority 2: exploit elemental weakness
+        foreach (var skill in usable.Where(s => s.damageType == SkillDamageType.Magical))
+        {
+            var weakTarget = aliveEnemies.FirstOrDefault(e =>
+                ElementSystem.GetModifier(skill.element, e.ElementalAffinity) > 1f);
+            if (weakTarget != null) return new BotAction(weakTarget, skill);
+        }
+
+        // Priority 3: target lowest HP enemy
+        var lowestHP = aliveEnemies.OrderBy(e => e.CurrentHP).First();
+        return new BotAction(lowestHP);
+    }
 }
