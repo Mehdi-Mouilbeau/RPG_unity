@@ -68,18 +68,25 @@ Toutes les scènes accèdent aux données via `GameSession.Instance`.
 - `SaveMenuUI.cs` — bouton accessible depuis pause (Échap) ou PNJ Sauvegarde → appelle `SaveSystem.Save()`
 
 **Dialogues Yarn Spinner/**
-- `Assets/Dialogue/Village.yarn` — dialogues pour 4 PNJs : Villageois, Forgeron (accès ForgeSystem), Enchanteur (accès EnchantSystem), PNJ Sauvegarde (déclenche save)
+- `Assets/Dialogue/Village.yarn` — dialogues pour 4 PNJs : Villageois, Forgeron, Enchanteur, PNJ Sauvegarde (déclenche save)
 - `Assets/Dialogue/Boss.yarn` — cinématique d'intro du Roi Squelette avant le combat
+
+> **Forgeron / Enchanteur en Plan 6 :** les dialogues Yarn Spinner affichent un message placeholder ("Le forgeron est occupé, revenez plus tard."). L'UI de forge et d'enchantement complète est hors scope Plan 6 (voir §9).
+
+**Scripts/Campaign/**
+- `GameDataRegistry.cs` — ScriptableObject placé dans `Resources/GameDataRegistry` ; contient `ClassSO[] classes`, `RaceSO[] races`, `EquipmentSO[] equipment` ; méthodes statiques `GetClass(string key)`, `GetRace(string key)`, `GetEquipment(string key)` pour résoudre les clés de sauvegarde en SO. Clé = nom du SO (`classSO.className`, `raceSO.raceName`, `equipmentSO.equipmentName`). Chargé via `Resources.Load<GameDataRegistry>("GameDataRegistry")`.
 
 ### 3.3 Assets ScriptableObjects (générés par RPGAssetCreator)
 
 **Ennemis (EnemySO) :**
-| Nom | Zone | HP | ATK | DEF | AGI | Affinité | XP |
-|-----|------|----|-----|-----|-----|----------|----|
-| Squelette | Donjon | 60 | 18 | 8 | 10 | Ténèbres | 30 |
-| Archer Squelette | Donjon | 45 | 22 | 5 | 15 | Ténèbres | 35 |
-| Golem d'Os | Donjon | 90 | 15 | 18 | 6 | Ténèbres | 50 |
-| Roi Squelette | Boss | 300 | 30 | 15 | 12 | Ténèbres | 500 |
+| Nom | Zone | HP | MP | ATK | DEF | MAG | RES | AGI | LCK | Affinité | XP |
+|-----|------|----|----|-----|-----|-----|-----|-----|-----|----------|----|
+| Squelette | Donjon | 60 | 0 | 18 | 8 | 0 | 5 | 10 | 5 | Ténèbres | 30 |
+| Archer Squelette | Donjon | 45 | 0 | 22 | 5 | 0 | 5 | 15 | 8 | Ténèbres | 35 |
+| Golem d'Os | Donjon | 90 | 0 | 15 | 18 | 0 | 10 | 6 | 3 | Ténèbres | 50 |
+| Roi Squelette | Boss | 300 | 80 | 30 | 15 | 25 | 15 | 12 | 10 | Ténèbres | 500 |
+
+> Le Roi Squelette a des MP et MAG pour ses sorts (Ténèbres en phase 1, Cri des Morts en phase 2). Les ennemis normaux ont MP=0 et n'utilisent que des attaques physiques. `BossController` lit `boss.CharacterData.CurrentHP` directement sur `ActionResolvedEvent` pour vérifier le seuil de phase.
 
 **Zones (CampaignZoneSO) :**
 - `Zone_Village` — pas d'ennemis aléatoires, pas de boss
@@ -100,11 +107,18 @@ Toutes les scènes accèdent aux données via `GameSession.Instance`.
 
 - **Phase 1 (100% → 50% HP)** : attaques normales, sort Ténèbres, IA Normal
 - **Transition à 50% HP** : active "Armure de Crâne" (bouclier = 30% du HP max du boss via `StatusEffectType.Shield`) + publie `BossPhaseEvent { Phase = 2 }`
-- **Phase 2 (50% → 0%)** : ATK +25%, peut utiliser "Appel des Morts" (invoque un Squelette comme allié, 1 fois)
+- **Phase 2 (50% → 0%)** : ATK +25% via boost temporaire sur le `CharacterData` du boss ; utilise "Cri des Morts" (sort qui applique le statut Poison à tous les ennemis, 1 fois par combat)
 
-**Implémentation :** `BossController.cs` (MonoBehaviour attaché au GameObject boss dans la scène Battle) qui s'abonne à `CharacterDiedEvent` et `ActionResolvedEvent` pour surveiller le seuil de HP.
+> "Appel des Morts" (invocation d'allié) est hors scope Plan 6 — injecter un personnage dans un `TurnSystem` existant nécessite une refonte non triviale. Remplacé par "Cri des Morts" (sort de zone, mécanique purement statuts, déjà supportée).
 
-> Note : "Appel des Morts" (invocation d'allié en combat) est une mécanique nouvelle. Pour Plan 6, l'allié invoqué est un `CharacterData` créé à la volée depuis un `EnemySO` et injecté dans le `TurnSystem` existant.
+**Implémentation — séparation logique / MonoBehaviour :**
+
+La logique de phase est extraite dans une classe pure C# testable :
+
+- `BossPhaseLogic.cs` (pur C#) — reçoit `currentHP` et `maxHP`, expose `bool ShouldTransitionToPhase2(int currentHP, int maxHP)` et `bool Phase2Active`. Pas de dépendance Unity. **Testable en EditMode.**
+- `BossController.cs` (MonoBehaviour) — attaché au GameObject boss dans la scène Battle ; instancie `BossPhaseLogic` ; s'abonne à `ActionResolvedEvent` pour vérifier le seuil et appliquer les effets de phase 2 sur le `CharacterData` du boss.
+
+Les tests ciblent `BossPhaseLogic` uniquement.
 
 ---
 
@@ -211,3 +225,5 @@ Assets à préparer pour Plan 7 :
 - Audio (musiques, SFX) (Plan 7)
 - Classes/races au-delà des 3 persos prédéfinis (Plan 7)
 - DOTween animations (Plan 7)
+- UI complète Forgeron / Enchanteur (Plan 7) — Plan 6 = dialogue placeholder uniquement
+- Invocation d'alliés en combat (Plan 7) — remplacée par "Cri des Morts" en Plan 6
