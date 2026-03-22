@@ -17,9 +17,16 @@ public class BattleBootstrap : MonoBehaviour
         var enemy = new CharacterData();
         enemy.InitializeFromSO("Ennemi", enemyClass, enemyRace, level: 1);
 
-        BattleManager.Instance.StartBattle(
-            new List<CharacterData> { player },
-            new List<CharacterData> { enemy },
-            enemyBotBrain);
+        if (MatchManager.Instance != null)
+            MatchManager.Instance.StartArena(
+                new List<CharacterData> { player },
+                new List<CharacterData> { enemy },
+                team1IsBot: true,
+                botBrain: enemyBotBrain);
+        else
+            BattleManager.Instance.StartBattle(
+                new List<CharacterData> { player },
+                new List<CharacterData> { enemy },
+                enemyBotBrain);
     }
 }
