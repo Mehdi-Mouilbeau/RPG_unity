@@ -1429,8 +1429,18 @@ git commit -m "feat: add exploration scripts (PlayerController, NpcInteractor, C
 ## Task 10: BossController + BattleCampaignBridge
 
 **Files:**
+- Modify: `My project/Assets/Scripts/Characters/CharacterData.cs`
 - Create: `My project/Assets/Scripts/Combat/BossController.cs`
 - Create: `My project/Assets/Scripts/Combat/BattleCampaignBridge.cs`
+
+- [ ] **Step 0: Ajouter AddBaseATKBonus à CharacterData**
+
+Ouvrir `My project/Assets/Scripts/Characters/CharacterData.cs`. Ajouter cette méthode après `RestoreMP` :
+
+```csharp
+/// <summary>Boost temporaire d'ATK (phase 2 boss). Non sauvegardé.</summary>
+public void AddBaseATKBonus(int amount) => _baseATK += amount;
+```
 
 - [ ] **Step 1: Créer BossController.cs**
 
@@ -1484,8 +1494,10 @@ public class BossController : MonoBehaviour
         };
         _boss.ActiveStatuses.Add(shieldStatus);
 
-        // ATK +25% : boost direct sur _baseATK n'est pas accessible (private)
-        // On publie l'event et le GameSession/UI peut en tenir compte
+        // ATK +25% via AddBaseATKBonus (ajouté dans CharacterData)
+        int atkBoost = Mathf.RoundToInt(_boss.ATK * (_logic.Phase2ATKMultiplier - 1f));
+        _boss.AddBaseATKBonus(atkBoost);
+
         EventBus.Publish(new BossPhaseEvent { Phase = 2, Boss = _boss });
 
         Debug.Log($"[Boss] {_boss.CharacterName} passe en Phase 2 ! Bouclier activé ({shieldValue} HP).");
@@ -1573,8 +1585,21 @@ public class BattleCampaignBridge : MonoBehaviour
             new List<CharacterData> { player }, enemies, brain);
 
         // Si c'est un boss, initialiser BossController sur le premier ennemi
+        CharacterData bossChar = null;
         if (encounter.IsBoss && bossController != null && enemies.Count > 0)
-            bossController.Initialize(enemies[0]);
+        {
+            bossChar = enemies[0];
+            bossController.Initialize(bossChar);
+
+            // Câbler Cri des Morts : au début de chaque tour du boss en phase 2
+            System.Action<TurnStartedEvent> onTurn = null;
+            onTurn = turnEvt =>
+            {
+                if (turnEvt.Character == bossChar)
+                    bossController.TryUseCriDesMorts(BattleManager.Instance.GetAliveAllies().ToArray());
+            };
+            EventBus.Subscribe<TurnStartedEvent>(onTurn);
+        }
 
         session.PendingEncounter = null;
 
@@ -1631,31 +1656,40 @@ Créer `My project/Assets/Scripts/Campaign/UI/MainMenuUI.cs` :
 ```csharp
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] private Button btnStart;
-    [SerializeField] private Button btnLoad;
-    [SerializeField] private Button btnArena;
-    [SerializeField] private Button btnQuit;
+    [SerializeField] private Button     btnStart;  // "Nouvelle Partie"
+    [SerializeField] private Button     btnLoad;   // "Continuer" (ou "Charger")
+    [SerializeField] private Button     btnArena;
+    [SerializeField] private Button     btnQuit;
+    [SerializeField] private TMP_Text   btnStartLabel;
 
     private void Start()
     {
         bool hasSave = SaveSystem.HasSave();
-        btnLoad.interactable = hasSave;
 
-        btnStart.onClick.AddListener(OnStart);
-        btnLoad.onClick.AddListener(OnLoad);
+        // Si une sauvegarde existe : "Nouvelle Partie" et "Continuer" sont tous les deux actifs
+        // Sinon : "Continuer" est grisé
+        btnLoad.interactable = hasSave;
+        if (btnStartLabel != null)
+            btnStartLabel.text = "Nouvelle Partie";
+
+        btnStart.onClick.AddListener(OnNewGame);
+        btnLoad.onClick.AddListener(OnContinue);
         btnArena.onClick.AddListener(OnArena);
         btnQuit.onClick.AddListener(OnQuit);
     }
 
-    private void OnStart()
+    private void OnNewGame()
     {
+        // Nouvelle partie : efface la sauvegarde précédente et va à CharacterSelect
+        SaveSystem.Delete();
         SceneLoader.Instance.LoadScene("CharacterSelect");
     }
 
-    private void OnLoad()
+    private void OnContinue()
     {
         GameSession.Instance.Load();
         SceneLoader.Instance.LoadScene("WorldMap");
