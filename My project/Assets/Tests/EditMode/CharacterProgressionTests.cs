@@ -103,7 +103,7 @@ public class CharacterProgressionTests
 
         bool resetOk = c.ResetSkillTree(gold: 1000, out int cost);
         Assert.IsTrue(resetOk);
-        Assert.AreEqual(50, cost); // level 1 × 50
+        Assert.AreEqual(100, cost); // level 2 × 50 (GainXP(100) → niveau 2)
         Assert.AreEqual(1, c.SkillPoints); // refunded
     }
 
