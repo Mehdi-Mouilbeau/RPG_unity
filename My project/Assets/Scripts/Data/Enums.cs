@@ -19,3 +19,16 @@ public enum EquipmentEffectType
 }
 
 public enum SkillBranch { Common, SpecA, SpecB }
+
+public enum CompanionType { Offensif, Defensif, Support, Utilitaire }
+
+public enum CompanionEffectType
+{
+    DirectDamage,       // Inflict flat damage to one or all enemies
+    Heal,               // Restore HP to one or all allies
+    RemoveStatuses,     // Remove all negative statuses from target(s)
+    BoostAgi,           // Increase AGI (publishes event; mechanical effect handled by TurnSystem)
+    RevealInfo,         // Reveal enemy weakness (publishes event; UI-layer effect)
+}
+
+public enum CompanionTargetType { EnemySingle, AllEnemies, AllySingle, AllAllies }
