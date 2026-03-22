@@ -35,15 +35,9 @@ public class BossController : MonoBehaviour
         bool transitioned = _logic.CheckAndTransition(_boss.CurrentHP);
         if (!transitioned) return;
 
-        // Armure de Crâne : bouclier = 30% HP max
+        // Armure de Crâne : bouclier = 30% HP max (value = shieldHP)
         int shieldValue = Mathf.RoundToInt(_boss.MaxHP * 0.3f);
-        var shieldStatus = new StatusEffect
-        {
-            type      = StatusEffectType.Shield,
-            duration  = 999,
-            shieldHP  = shieldValue
-        };
-        _boss.ActiveStatuses.Add(shieldStatus);
+        _boss.ActiveStatuses.Add(new StatusEffect(StatusEffectType.Shield, 999, shieldValue));
 
         // ATK +25% via AddBaseATKBonus
         int atkBoost = Mathf.RoundToInt(_boss.ATK * (_logic.Phase2ATKMultiplier - 1f));
@@ -64,14 +58,7 @@ public class BossController : MonoBehaviour
 
         _cryUsed = true;
         foreach (var target in targets.Where(t => t != null && !t.IsDead))
-        {
-            var poison = new StatusEffect
-            {
-                type     = StatusEffectType.Poison,
-                duration = 3
-            };
-            target.ActiveStatuses.Add(poison);
-        }
+            target.ActiveStatuses.Add(new StatusEffect(StatusEffectType.Poison, 3));
 
         Debug.Log("[Boss] Cri des Morts : tous les alliés du joueur sont empoisonnés !");
         return true;
