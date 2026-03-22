@@ -11,27 +11,27 @@ public class SaveMenuUI : MonoBehaviour
 
     private void Start()
     {
-        panel.SetActive(false);
-        btnSave.onClick.AddListener(OnSave);
-        btnClose.onClick.AddListener(OnClose);
+        if (panel != null) panel.SetActive(false);
+        if (btnSave != null) btnSave.onClick.AddListener(OnSave);
+        if (btnClose != null) btnClose.onClick.AddListener(OnClose);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (panel != null && Input.GetKeyDown(KeyCode.Escape))
             panel.SetActive(!panel.activeSelf);
     }
 
     private void OnSave()
     {
-        GameSession.Instance.Save();
+        GameSession.Instance?.Save();
         if (statusText) statusText.text = "Partie sauvegardée !";
     }
 
     private void OnClose()
     {
-        panel.SetActive(false);
+        if (panel != null) panel.SetActive(false);
     }
 
-    public void Show() => panel.SetActive(true);
+    public void Show() { if (panel != null) panel.SetActive(true); }
 }

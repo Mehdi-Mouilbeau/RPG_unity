@@ -30,6 +30,7 @@ public class CharacterSelectUI : MonoBehaviour
 
     private void SelectCharacter(int index)
     {
+        if (index >= characters.Length) return;
         var config = characters[index];
         var character = GameSession.CreatePredefinedCharacter(
             config.characterName,
@@ -38,9 +39,12 @@ public class CharacterSelectUI : MonoBehaviour
             config.level,
             config.companionSO);
 
-        GameSession.Instance.SetActiveCharacter(character);
-        GameSession.Instance.Gold = 200;
-        SceneLoader.Instance.LoadScene("WorldMap");
+        if (GameSession.Instance != null)
+        {
+            GameSession.Instance.SetActiveCharacter(character);
+            GameSession.Instance.Gold = 200;
+        }
+        if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("WorldMap");
     }
 
     public void ShowDescription(int index)

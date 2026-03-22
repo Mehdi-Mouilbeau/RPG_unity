@@ -13,31 +13,29 @@ public class MainMenuUI : MonoBehaviour
     private void Start()
     {
         bool hasSave = SaveSystem.HasSave();
-        btnLoad.interactable = hasSave;
-        if (btnStartLabel != null)
-            btnStartLabel.text = "Nouvelle Partie";
-
-        btnStart.onClick.AddListener(OnNewGame);
-        btnLoad.onClick.AddListener(OnContinue);
-        btnArena.onClick.AddListener(OnArena);
-        btnQuit.onClick.AddListener(OnQuit);
+        if (btnLoad != null) btnLoad.interactable = hasSave;
+        if (btnStartLabel != null) btnStartLabel.text = "Nouvelle Partie";
+        if (btnStart != null) btnStart.onClick.AddListener(OnNewGame);
+        if (btnLoad != null) btnLoad.onClick.AddListener(OnContinue);
+        if (btnArena != null) btnArena.onClick.AddListener(OnArena);
+        if (btnQuit != null) btnQuit.onClick.AddListener(OnQuit);
     }
 
     private void OnNewGame()
     {
         SaveSystem.Delete();
-        SceneLoader.Instance.LoadScene("CharacterSelect");
+        if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("CharacterSelect");
     }
 
     private void OnContinue()
     {
-        GameSession.Instance.Load();
-        SceneLoader.Instance.LoadScene("WorldMap");
+        if (GameSession.Instance != null) GameSession.Instance.Load();
+        if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("WorldMap");
     }
 
     private void OnArena()
     {
-        SceneLoader.Instance.LoadScene("Arena");
+        if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("Arena");
     }
 
     private void OnQuit()
