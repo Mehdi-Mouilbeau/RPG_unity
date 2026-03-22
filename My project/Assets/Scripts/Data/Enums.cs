@@ -17,3 +17,5 @@ public enum EquipmentEffectType
     MpRegenPerTurn,  // restore flat MP each turn
     CritBoost,       // increase crit chance (value = 0–1 fraction added to base)
 }
+
+public enum SkillBranch { Common, SpecA, SpecB }
