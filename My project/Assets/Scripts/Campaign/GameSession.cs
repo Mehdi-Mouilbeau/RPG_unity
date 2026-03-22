@@ -79,6 +79,9 @@ public class GameSession : MonoBehaviour
         int hpDiff = character.CurrentHP - data.currentHP;
         if (hpDiff > 0) character.TakeDamage(hpDiff);
 
+        int mpDiff = character.CurrentMP - data.currentMP;
+        if (mpDiff > 0) character.SpendMP(mpDiff);
+
         if (companionSO != null) character.AssignCompanion(companionSO);
 
         Gold = data.gold;
