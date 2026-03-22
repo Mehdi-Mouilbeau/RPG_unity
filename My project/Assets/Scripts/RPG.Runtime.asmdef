@@ -3,9 +3,7 @@
     "rootNamespace": "",
     "references": [
         "Unity.TextMeshPro",
-        "Unity.InputSystem",
-        "YarnSpinner",
-        "YarnSpinner.Unity"
+        "Unity.InputSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

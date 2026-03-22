@@ -1,15 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Yarn.Unity;
 
 /// <summary>
 /// Attaché à un PNJ. Quand le joueur entre dans le trigger et appuie sur E,
-/// démarre le dialogue Yarn Spinner correspondant.
+/// affiche le dialogue dans la console (stub Plan 6 — Yarn Spinner câblé en Plan 7).
 /// </summary>
 public class NpcInteractor : MonoBehaviour
 {
-    [SerializeField] private string        dialogueNode = "Villageois";
-    [SerializeField] private DialogueRunner dialogueRunner;
+    [SerializeField] private string dialogueNode = "Villageois";
 
     private bool _playerNearby;
 
@@ -25,11 +23,7 @@ public class NpcInteractor : MonoBehaviour
 
     private void Update()
     {
-        if (_playerNearby && Keyboard.current.eKey.wasPressedThisFrame)
-        {
-            if (dialogueRunner == null) return;
-            if (!dialogueRunner.IsDialogueRunning)
-                dialogueRunner.StartDialogue(dialogueNode);
-        }
+        if (_playerNearby && Keyboard.current != null && Keyboard.current.eKey.wasPressedThisFrame)
+            Debug.Log($"[NPC] Dialogue : {dialogueNode} (Yarn Spinner sera câblé en Plan 7)");
     }
 }

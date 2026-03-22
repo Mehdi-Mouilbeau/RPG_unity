@@ -1,12 +1,13 @@
 using UnityEngine;
-using Yarn.Unity;
 
+/// <summary>
+/// Stub Plan 6 — la commande Yarn <<save>> sera câblée en Plan 7 avec Yarn Spinner.
+/// </summary>
 public class YarnCommands : MonoBehaviour
 {
-    [YarnCommand("save")]
     public void SaveGame()
     {
         GameSession.Instance?.Save();
-        Debug.Log("[Yarn] Partie sauvegardée.");
+        Debug.Log("[YarnCommands] Partie sauvegardée.");
     }
 }
