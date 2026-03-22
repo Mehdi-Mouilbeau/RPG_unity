@@ -49,9 +49,13 @@ public class SaveSystemTests
         Assert.AreEqual(500,               loaded.experience);
         Assert.AreEqual(200,               loaded.gold);
         Assert.AreEqual("loup_des_ombres", loaded.companionKey);
+        Assert.AreEqual(120,               loaded.currentHP);
+        Assert.AreEqual(50,                loaded.currentMP);
         Assert.AreEqual(1,                 loaded.flags.Count);
         Assert.AreEqual("village_visited", loaded.flags[0].key);
+        Assert.AreEqual(true,              loaded.flags[0].value);
         Assert.AreEqual(1,                 loaded.equippedItemKeys.Count);
+        Assert.AreEqual("iron_sword",      loaded.equippedItemKeys[0]);
     }
 
     [Test]
