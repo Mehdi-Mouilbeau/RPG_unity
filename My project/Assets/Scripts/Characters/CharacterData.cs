@@ -182,6 +182,9 @@ public class CharacterData
         CurrentMP = System.Math.Min(MaxMP, CurrentMP + amount);
     }
 
+    /// <summary>Boost temporaire d'ATK (phase 2 boss). Non sauvegardé.</summary>
+    public void AddBaseATKBonus(int amount) => _baseATK += amount;
+
     /// <summary>Restores HP, MP, and experience directly without triggering game events. Used by SaveSystem on load.</summary>
     public void ApplyLoadedStats(int hp, int mp, int experience)
     {
