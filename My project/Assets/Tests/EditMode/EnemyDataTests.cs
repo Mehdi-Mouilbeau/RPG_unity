@@ -7,7 +7,6 @@ public class EnemyDataTests
     public void EnemySO_DefaultXPReward_IsPositive()
     {
         var enemy = ScriptableObject.CreateInstance<EnemySO>();
-        enemy.xpReward = 30;
         Assert.Greater(enemy.xpReward, 0);
     }
 
