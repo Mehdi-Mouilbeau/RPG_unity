@@ -20,6 +20,7 @@ public static class RPGAssetCreator
         CreateArenaRoster();
         CreateStarterEquipment();
         CreateStarterSkillTrees();
+        CreateStarterCompanions();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("RPG: All starter assets created successfully!");
@@ -35,6 +36,8 @@ public static class RPGAssetCreator
         EnsureFolder("Assets/_Data/Arena");
         EnsureFolder("Assets/_Data/Equipment");
         EnsureFolder("Assets/_Data/SkillTrees");
+        EnsureFolder("Assets/_Data/Companions");
+        EnsureFolder("Assets/_Data/Companions/Skills");
     }
 
     // ────────────────────────────── SKILLS ──────────────────────────────
@@ -466,6 +469,112 @@ public static class RPGAssetCreator
         EditorUtility.SetDirty(tree);
         AssetDatabase.SaveAssets();
         Debug.Log("[RPGAssetCreator] GuerrierSkillTree created.");
+    }
+
+    // ────────────────────────────── COMPANIONS ──────────────────────────────
+
+    private static void CreateStarterCompanions()
+    {
+        // ── Loup des Ombres (Offensif) ───────────────────────────────────
+        var morsure = CreateCompanionSkill("LoupMorsure",
+            skillName: "Morsure Sombre", description: "Le loup mord l'ennemi avec une force obscure.",
+            effect: CompanionEffectType.DirectDamage, target: CompanionTargetType.EnemySingle,
+            value: 35, cooldown: 3);
+        var hurlement = CreateCompanionSkill("LoupHurlement",
+            skillName: "Hurlement", description: "Un hurlement qui touche tous les ennemis.",
+            effect: CompanionEffectType.DirectDamage, target: CompanionTargetType.AllEnemies,
+            value: 20, cooldown: 4);
+        var bond = CreateCompanionSkill("LoupBond",
+            skillName: "Bond Prédateur", description: "Un bond puissant sur une cible unique.",
+            effect: CompanionEffectType.DirectDamage, target: CompanionTargetType.EnemySingle,
+            value: 50, cooldown: 6);
+
+        var loup = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/LoupDesOmbres.asset");
+        loup.companionName = "Loup des Ombres";
+        loup.description = "Un loup spectral aux crocs imprégnés d'ombre.";
+        loup.type = CompanionType.Offensif;
+        loup.skills = new[] { morsure, hurlement, bond };
+        EditorUtility.SetDirty(loup);
+
+        // ── Golem de Cristal (Défensif) ──────────────────────────────────
+        var absorption = CreateCompanionSkill("GolemAbsorption",
+            skillName: "Absorption", description: "Le golem restaure les HP d'un allié blessé.",
+            effect: CompanionEffectType.Heal, target: CompanionTargetType.AllySingle,
+            value: 40, cooldown: 4);
+        var reparation = CreateCompanionSkill("GolemReparation",
+            skillName: "Réparation", description: "Le golem répare légèrement toute l'équipe.",
+            effect: CompanionEffectType.Heal, target: CompanionTargetType.AllAllies,
+            value: 20, cooldown: 5);
+        var purification = CreateCompanionSkill("GolemPurification",
+            skillName: "Purification", description: "Supprime les statuts négatifs d'un allié.",
+            effect: CompanionEffectType.RemoveStatuses, target: CompanionTargetType.AllySingle,
+            value: 0, cooldown: 3);
+
+        var golem = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/GolemDeCristal.asset");
+        golem.companionName = "Golem de Cristal";
+        golem.description = "Un gardien de cristal qui protège ses alliés.";
+        golem.type = CompanionType.Defensif;
+        golem.skills = new[] { absorption, reparation, purification };
+        EditorUtility.SetDirty(golem);
+
+        // ── Fée Sylvestre (Support) ──────────────────────────────────────
+        var soinFee = CreateCompanionSkill("FeeSoin",
+            skillName: "Soin Sylvestre", description: "La fée soigne généreusement un allié.",
+            effect: CompanionEffectType.Heal, target: CompanionTargetType.AllySingle,
+            value: 35, cooldown: 3);
+        var benediction = CreateCompanionSkill("FeeBenediction",
+            skillName: "Bénédiction", description: "La fée soigne légèrement toute l'équipe.",
+            effect: CompanionEffectType.Heal, target: CompanionTargetType.AllAllies,
+            value: 15, cooldown: 3);
+        var purificationTotale = CreateCompanionSkill("FeePurification",
+            skillName: "Purification Totale", description: "Supprime tous les statuts négatifs de l'équipe.",
+            effect: CompanionEffectType.RemoveStatuses, target: CompanionTargetType.AllAllies,
+            value: 0, cooldown: 5);
+
+        var fee = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/FeeSylvestre.asset");
+        fee.companionName = "Fée Sylvestre";
+        fee.description = "Une fée des bois dotée de pouvoirs de guérison.";
+        fee.type = CompanionType.Support;
+        fee.skills = new[] { soinFee, benediction, purificationTotale };
+        EditorUtility.SetDirty(fee);
+
+        // ── Corbeau Analyste (Utilitaire) ────────────────────────────────
+        var analyse = CreateCompanionSkill("CorbeauAnalyse",
+            skillName: "Analyse", description: "Le corbeau révèle les faiblesses de l'ennemi.",
+            effect: CompanionEffectType.RevealInfo, target: CompanionTargetType.EnemySingle,
+            value: 0, cooldown: 3);
+        var distraction = CreateCompanionSkill("CorbeauDistraction",
+            skillName: "Distraction", description: "Le corbeau distrait et griffe un ennemi.",
+            effect: CompanionEffectType.DirectDamage, target: CompanionTargetType.EnemySingle,
+            value: 15, cooldown: 3);
+        var acceleration = CreateCompanionSkill("CorbeauAcceleration",
+            skillName: "Accélération", description: "Le corbeau augmente l'initiative d'un allié.",
+            effect: CompanionEffectType.BoostAgi, target: CompanionTargetType.AllySingle,
+            value: 0, cooldown: 5);
+
+        var corbeau = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/CorbeauAnalyste.asset");
+        corbeau.companionName = "Corbeau Analyste";
+        corbeau.description = "Un corbeau intelligent qui analyse et perturbe les ennemis.";
+        corbeau.type = CompanionType.Utilitaire;
+        corbeau.skills = new[] { analyse, distraction, acceleration };
+        EditorUtility.SetDirty(corbeau);
+
+        AssetDatabase.SaveAssets();
+        Debug.Log("[RPGAssetCreator] 4 starter companions created.");
+    }
+
+    private static CompanionSkillSO CreateCompanionSkill(string assetName, string skillName,
+        string description, CompanionEffectType effect, CompanionTargetType target, int value, int cooldown)
+    {
+        var skill = CreateOrLoad<CompanionSkillSO>($"Assets/_Data/Companions/Skills/{assetName}.asset");
+        skill.skillName    = skillName;
+        skill.description  = description;
+        skill.effectType   = effect;
+        skill.targetType   = target;
+        skill.value        = value;
+        skill.cooldownTurns = cooldown;
+        EditorUtility.SetDirty(skill);
+        return skill;
     }
 }
 #endif
