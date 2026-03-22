@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class SaveMenuUI : MonoBehaviour
@@ -18,7 +19,7 @@ public class SaveMenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (panel != null && Input.GetKeyDown(KeyCode.Escape))
+        if (panel != null && Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
             panel.SetActive(!panel.activeSelf);
     }
 

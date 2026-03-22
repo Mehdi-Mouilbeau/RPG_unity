@@ -85,6 +85,10 @@ public class BattleCampaignBridge : MonoBehaviour
                 if (encounter.IsBoss)
                     EventBus.Publish(new BossDefeatedEvent { Player = player });
 
+                if (encounter.IsBoss && encounter.Zone != null
+                    && !string.IsNullOrEmpty(encounter.Zone.bossDefeatedFlagKey))
+                    session.Flags.Set(encounter.Zone.bossDefeatedFlagKey);
+
                 session.Save();
                 if (SceneLoader.Instance != null)
                     SceneLoader.Instance.LoadScene("WorldMap");
