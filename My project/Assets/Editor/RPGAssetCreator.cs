@@ -18,6 +18,7 @@ public static class RPGAssetCreator
         CreateClasses();
         CreateBotBrains();
         CreateArenaRoster();
+        CreateStarterEquipment();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("RPG: All starter assets created successfully!");
@@ -31,6 +32,7 @@ public static class RPGAssetCreator
         EnsureFolder("Assets/_Data/Classes");
         EnsureFolder("Assets/_Data/AI");
         EnsureFolder("Assets/_Data/Arena");
+        EnsureFolder("Assets/_Data/Equipment");
     }
 
     // ────────────────────────────── SKILLS ──────────────────────────────
@@ -307,6 +309,112 @@ public static class RPGAssetCreator
         var asset = AssetDatabase.LoadAssetAtPath<T>(path);
         if (asset == null) Debug.LogError($"RPGAssetCreator: asset not found at {path}");
         return asset;
+    }
+
+    // ────────────────────────────── EQUIPMENT ───────────────────────────────
+
+    private static void CreateStarterEquipment()
+    {
+        // ── Warrior starter gear (physical focus) ──
+        CreateEquipment("EpeeEnFer",
+            itemName: "Épée en Fer", description: "Une lame solide, taillée pour le combat.",
+            slot: EquipmentSlot.MainWeapon, rarity: EquipmentRarity.Common,
+            atkBonus: 6, defBonus: 0, hpBonus: 0, mpBonus: 0,
+            magBonus: 0, resBonus: 0, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "FerBrut", "Charbon" }, goldCost: 80,
+            effectPool: new[] { "atk_3", "crit_5", "damage_on_hit" });
+
+        CreateEquipment("BouclierEnBois",
+            itemName: "Bouclier en Bois", description: "Protection basique en bois épais.",
+            slot: EquipmentSlot.Offhand, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 4, hpBonus: 10, mpBonus: 0,
+            magBonus: 0, resBonus: 0, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "BoisDur" }, goldCost: 50,
+            effectPool: new[] { "def_2", "hp_regen", "elemental_resist" });
+
+        CreateEquipment("CasqueEnCuir",
+            itemName: "Casque en Cuir", description: "Un casque léger en cuir tanné.",
+            slot: EquipmentSlot.Helmet, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 2, hpBonus: 15, mpBonus: 0,
+            magBonus: 0, resBonus: 1, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "CuirBrut" }, goldCost: 40,
+            effectPool: new[] { "def_2", "res_2", "hp_regen" });
+
+        CreateEquipment("ArmureEnCuir",
+            itemName: "Armure en Cuir", description: "Armure légère offrant une bonne mobilité.",
+            slot: EquipmentSlot.Armor, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 5, hpBonus: 25, mpBonus: 0,
+            magBonus: 0, resBonus: 2, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "CuirBrut", "FerBrut" }, goldCost: 100,
+            effectPool: new[] { "def_3", "hp_regen", "elemental_resist" });
+
+        CreateEquipment("BottesEnCuir",
+            itemName: "Bottes en Cuir", description: "Des bottes confortables pour les longs voyages.",
+            slot: EquipmentSlot.Boots, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 1, hpBonus: 0, mpBonus: 0,
+            magBonus: 0, resBonus: 0, agiBonus: 3, lckBonus: 0,
+            materials: new[] { "CuirBrut" }, goldCost: 30,
+            effectPool: new[] { "agi_2", "lck_2", "crit_3" });
+
+        CreateEquipment("AnneauBasique1",
+            itemName: "Anneau Basique", description: "Un anneau simple qui porte chance.",
+            slot: EquipmentSlot.Ring1, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 0, hpBonus: 0, mpBonus: 5,
+            magBonus: 0, resBonus: 0, agiBonus: 0, lckBonus: 2,
+            materials: new[] { "PierreGemme" }, goldCost: 60,
+            effectPool: new[] { "lck_3", "crit_5", "mp_regen" });
+
+        CreateEquipment("AnneauBasique2",
+            itemName: "Anneau de Vigueur", description: "Un anneau qui renforce la résistance.",
+            slot: EquipmentSlot.Ring2, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 0, hpBonus: 5, mpBonus: 0,
+            magBonus: 0, resBonus: 2, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "PierreGemme" }, goldCost: 60,
+            effectPool: new[] { "res_2", "hp_regen", "elemental_resist" });
+
+        CreateEquipment("BatonArcanique",
+            itemName: "Bâton Arcanique", description: "Un bâton chargé de puissance magique.",
+            slot: EquipmentSlot.MainWeapon, rarity: EquipmentRarity.Common,
+            atkBonus: 0, defBonus: 0, hpBonus: 0, mpBonus: 10,
+            magBonus: 7, resBonus: 0, agiBonus: 0, lckBonus: 0,
+            materials: new[] { "CristalArcanique", "BoisDur" }, goldCost: 90,
+            effectPool: new[] { "mag_4", "mp_regen", "crit_5" });
+
+        // ── Rare example (unlocked via Forge) ──
+        CreateEquipment("EpeeRunique",
+            itemName: "Épée Runique", description: "Lame gravée de runes anciennement oubliées.",
+            slot: EquipmentSlot.MainWeapon, rarity: EquipmentRarity.Rare,
+            atkBonus: 10, defBonus: 0, hpBonus: 0, mpBonus: 0,
+            magBonus: 0, resBonus: 0, agiBonus: 2, lckBonus: 0,
+            materials: new[] { "FerRunique", "Charbon", "CristalArcanique" }, goldCost: 250,
+            effectPool: new[] { "atk_5", "crit_8", "damage_on_hit", "elemental_fire" });
+    }
+
+    private static void CreateEquipment(string assetName, string itemName, string description,
+        EquipmentSlot slot, EquipmentRarity rarity,
+        int atkBonus, int defBonus, int hpBonus, int mpBonus,
+        int magBonus, int resBonus, int agiBonus, int lckBonus,
+        string[] materials, int goldCost, string[] effectPool)
+    {
+        string path = $"Assets/_Data/Equipment/{assetName}.asset";
+        if (AssetDatabase.LoadAssetAtPath<EquipmentSO>(path) != null) return;
+        var so = ScriptableObject.CreateInstance<EquipmentSO>();
+        so.itemName          = itemName;
+        so.description       = description;
+        so.slot              = slot;
+        so.rarity            = rarity;
+        so.atkBonus          = atkBonus;
+        so.defBonus          = defBonus;
+        so.hpBonus           = hpBonus;
+        so.mpBonus           = mpBonus;
+        so.magBonus          = magBonus;
+        so.resBonus          = resBonus;
+        so.agiBonus          = agiBonus;
+        so.lckBonus          = lckBonus;
+        so.craftingMaterials = materials;
+        so.craftingGoldCost  = goldCost;
+        so.effectPool        = effectPool;
+        AssetDatabase.CreateAsset(so, path);
     }
 }
 #endif
