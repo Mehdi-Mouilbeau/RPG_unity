@@ -5,14 +5,19 @@ public class CharacterData
 {
     public string CharacterName { get; private set; }
 
-    public int MaxHP { get; private set; }
-    public int MaxMP { get; private set; }
-    public int ATK { get; private set; }
-    public int DEF { get; private set; }
-    public int MAG { get; private set; }
-    public int RES { get; private set; }
-    public int AGI { get; private set; }
-    public int LCK { get; private set; }
+    // ── Base stats (set by Initialize; before equipment bonuses) ──────────
+    private int _baseMaxHP, _baseMaxMP;
+    private int _baseATK, _baseDEF, _baseMAG, _baseRES, _baseAGI, _baseLCK;
+
+    // ── Effective stats = base + equipment bonus ──────────────────────────
+    public int MaxHP => _baseMaxHP + Inventory.GetTotalHP();
+    public int MaxMP => _baseMaxMP + Inventory.GetTotalMP();
+    public int ATK   => _baseATK   + Inventory.GetTotalATK();
+    public int DEF   => _baseDEF   + Inventory.GetTotalDEF();
+    public int MAG   => _baseMAG   + Inventory.GetTotalMAG();
+    public int RES   => _baseRES   + Inventory.GetTotalRES();
+    public int AGI   => _baseAGI   + Inventory.GetTotalAGI();
+    public int LCK   => _baseLCK   + Inventory.GetTotalLCK();
 
     public int CurrentHP { get; private set; }
     public int CurrentMP { get; private set; }
@@ -27,8 +32,11 @@ public class CharacterData
     public List<SkillSO> Skills { get; } = new();
     public Dictionary<string, int> Cooldowns { get; } = new();
 
+    // ── Inventory — lazy-initialized, always non-null after first access ──
+    private Inventory _inventory;
+    public Inventory Inventory => _inventory ??= new Inventory(this);
+
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-    // Test/debug helpers — stripped from release builds
     private HashSet<StatusEffectType> _testImmunities = new();
     public void SetImmunity_TestOnly(StatusEffectType type) => _testImmunities.Add(type);
     public ElementType ElementalAffinity_TestOnly { set => ElementalAffinity = value; }
@@ -40,12 +48,12 @@ public class CharacterData
                            int mag, int res, int agi, int lck)
     {
         CharacterName = name;
-        MaxHP = hp; MaxMP = mp;
-        ATK = atk; DEF = def;
-        MAG = mag; RES = res;
-        AGI = agi; LCK = lck;
-        CurrentHP = hp;
-        CurrentMP = mp;
+        _baseMaxHP = hp; _baseMaxMP = mp;
+        _baseATK = atk; _baseDEF = def;
+        _baseMAG = mag; _baseRES = res;
+        _baseAGI = agi; _baseLCK = lck;
+        CurrentHP = MaxHP;
+        CurrentMP = MaxMP;
     }
 
     public void InitializeFromSO(string name, ClassSO classSO, RaceSO raceSO, int level = 1)
