@@ -9,6 +9,7 @@ public class ActionMenuUI : MonoBehaviour
     // Placeholder fields for Plan 2 — skills/items submenus not yet implemented
     [SerializeField] private Button skillsButton;
     [SerializeField] private Button itemsButton;
+    [SerializeField] private SkillMenuUI skillMenu;
     [SerializeField] private TMP_Text playerTurnLabel;
 
     private System.Action<BattleEndedEvent> _onBattleEnded;
@@ -17,6 +18,7 @@ public class ActionMenuUI : MonoBehaviour
     {
         attackButton.onClick.AddListener(OnAttackPressed);
         passButton.onClick.AddListener(OnPassPressed);
+        if (skillsButton != null) skillsButton.onClick.AddListener(OnSkillsPressed);
         EventBus.Subscribe<TurnStartedEvent>(OnTurnStarted);
         EventBus.Subscribe<PlayerTurnEvent>(OnPlayerTurn);
         _onBattleEnded = _ => SetMenuActive(false);
@@ -63,6 +65,12 @@ public class ActionMenuUI : MonoBehaviour
             1 => "JOUEUR 2",
             _ => ""
         };
+    }
+
+    private void OnSkillsPressed()
+    {
+        if (skillMenu != null) skillMenu.Show();
+        SetMenuActive(false);
     }
 
     private void SetMenuActive(bool active) => gameObject.SetActive(active);
