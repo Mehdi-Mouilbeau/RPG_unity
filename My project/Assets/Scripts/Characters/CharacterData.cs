@@ -182,6 +182,14 @@ public class CharacterData
         CurrentMP = System.Math.Min(MaxMP, CurrentMP + amount);
     }
 
+    /// <summary>Restores HP, MP, and experience directly without triggering game events. Used by SaveSystem on load.</summary>
+    public void ApplyLoadedStats(int hp, int mp, int experience)
+    {
+        CurrentHP = System.Math.Clamp(hp, 0, MaxHP);
+        CurrentMP = System.Math.Clamp(mp, 0, MaxMP);
+        Experience = experience;
+    }
+
     public int GetCooldown(SkillSO skill) =>
         Cooldowns.TryGetValue(skill.skillName, out int cd) ? cd : 0;
 

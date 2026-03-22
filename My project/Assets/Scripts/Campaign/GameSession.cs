@@ -75,12 +75,7 @@ public class GameSession : MonoBehaviour
         var character = new CharacterData();
         character.InitializeFromSO(data.characterName, classSO, raceSO, data.level);
 
-        // Restore HP/MP
-        int hpDiff = character.CurrentHP - data.currentHP;
-        if (hpDiff > 0) character.TakeDamage(hpDiff);
-
-        int mpDiff = character.CurrentMP - data.currentMP;
-        if (mpDiff > 0) character.SpendMP(mpDiff);
+        character.ApplyLoadedStats(data.currentHP, data.currentMP, data.experience);
 
         if (companionSO != null) character.AssignCompanion(companionSO);
 
