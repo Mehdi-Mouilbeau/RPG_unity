@@ -1,0 +1,31 @@
+title: Villageois
+---
+Villageois: Bienvenue dans le Village de Départ, voyageur.
+Villageois: Le donjon à l'est est dangereux... Le Roi Squelette y règne depuis des années.
+-> En savoir plus
+    Villageois: Des squelettes errent dans ses couloirs. Méfiez-vous de l'obscurité.
+-> Partir
+    Villageois: Bonne chance, héros.
+===
+
+title: Forgeron
+---
+Forgeron: Ah, un aventurier ! Je peux améliorer ton équipement... mais pas aujourd'hui.
+Forgeron: Mon enclume est en réparation. Reviens me voir plus tard.
+===
+
+title: Enchanteur
+---
+Enchanteur: Tu veux enchanter ton équipement ? Bonne idée...
+Enchanteur: Mais mes matériaux sont épuisés. Je dois attendre une nouvelle livraison.
+===
+
+title: PNJ_Sauvegarde
+---
+PNJ_Sauvegarde: Je peux graver ta progression dans les annales du village.
+-> Sauvegarder
+    <<save>>
+    PNJ_Sauvegarde: Ta progression est sauvegardée. Bonne chance !
+-> Non merci
+    PNJ_Sauvegarde: Comme tu veux. Sois prudent.
+===
