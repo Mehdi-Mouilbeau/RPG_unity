@@ -61,8 +61,15 @@ public static class ActionEvaluator
             if (weakTarget != null) return new BotAction(weakTarget, skill);
         }
 
-        // Priority 3: target lowest HP enemy
+        // Priority 3: use strongest offensive skill on lowest HP enemy
         var lowestHP = aliveEnemies.OrderBy(e => e.CurrentHP).First();
+        var offensiveSkill = usable
+            .Where(s => s.damageType == SkillDamageType.Physical || s.damageType == SkillDamageType.Magical)
+            .OrderByDescending(s => s.powerMultiplier)
+            .FirstOrDefault(s => s.powerMultiplier > 1f);
+        if (offensiveSkill != null) return new BotAction(lowestHP, offensiveSkill);
+
+        // Priority 4: basic attack fallback
         return new BotAction(lowestHP);
     }
 }
