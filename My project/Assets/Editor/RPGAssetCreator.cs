@@ -21,6 +21,9 @@ public static class RPGAssetCreator
         CreateStarterEquipment();
         CreateStarterSkillTrees();
         CreateStarterCompanions();
+        CreateCampaignEnemies();
+        CreateCampaignZones();
+        CreateGameDataRegistry();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("RPG: All starter assets created successfully!");
@@ -38,6 +41,10 @@ public static class RPGAssetCreator
         EnsureFolder("Assets/_Data/SkillTrees");
         EnsureFolder("Assets/_Data/Companions");
         EnsureFolder("Assets/_Data/Companions/Skills");
+        EnsureFolder("Assets/_Data/Enemies");
+        EnsureFolder("Assets/_Data/Zones");
+        EnsureFolder("Assets/_Data/LootTables");
+        EnsureFolder("Assets/Resources");
     }
 
     // ────────────────────────────── SKILLS ──────────────────────────────
@@ -575,6 +582,110 @@ public static class RPGAssetCreator
         skill.cooldownTurns = cooldown;
         EditorUtility.SetDirty(skill);
         return skill;
+    }
+
+    // ─────────────────────────── CAMPAIGN ENEMIES ───────────────────────────
+
+    private static void CreateCampaignEnemies()
+    {
+        var botNormal = CreateOrLoad<BotBrain>("Assets/_Data/AI/BotBrain_Normal.asset");
+
+        CreateEnemy("Squelette",
+            enemyName: "Squelette",
+            affinity: ElementType.Dark,
+            hp: 60, mp: 0, atk: 18, def: 8, mag: 0, res: 5, agi: 10, lck: 5,
+            xpReward: 30, botBrain: botNormal);
+
+        CreateEnemy("ArcherSquelette",
+            enemyName: "Archer Squelette",
+            affinity: ElementType.Dark,
+            hp: 45, mp: 0, atk: 22, def: 5, mag: 0, res: 5, agi: 15, lck: 8,
+            xpReward: 35, botBrain: botNormal);
+
+        CreateEnemy("GolemOs",
+            enemyName: "Golem d'Os",
+            affinity: ElementType.Dark,
+            hp: 90, mp: 0, atk: 15, def: 18, mag: 0, res: 10, agi: 6, lck: 3,
+            xpReward: 50, botBrain: botNormal);
+
+        CreateEnemy("RoiSquelette",
+            enemyName: "Roi Squelette",
+            affinity: ElementType.Dark,
+            hp: 300, mp: 80, atk: 30, def: 15, mag: 25, res: 15, agi: 12, lck: 10,
+            xpReward: 500, botBrain: botNormal);
+    }
+
+    private static EnemySO CreateEnemy(string assetName, string enemyName,
+        ElementType affinity, int hp, int mp, int atk, int def,
+        int mag, int res, int agi, int lck, int xpReward, BotBrain botBrain)
+    {
+        var enemy = CreateOrLoad<EnemySO>($"Assets/_Data/Enemies/{assetName}.asset");
+        enemy.enemyName         = enemyName;
+        enemy.elementalAffinity = affinity;
+        enemy.hp  = hp;  enemy.mp  = mp;
+        enemy.atk = atk; enemy.def = def;
+        enemy.mag = mag; enemy.res = res;
+        enemy.agi = agi; enemy.lck = lck;
+        enemy.xpReward = xpReward;
+        enemy.botBrain = botBrain;
+        EditorUtility.SetDirty(enemy);
+        return enemy;
+    }
+
+    // ─────────────────────────── CAMPAIGN ZONES ─────────────────────────────
+
+    private static void CreateCampaignZones()
+    {
+        var botNormal = CreateOrLoad<BotBrain>("Assets/_Data/AI/BotBrain_Normal.asset");
+
+        var squelette = CreateOrLoad<EnemySO>("Assets/_Data/Enemies/Squelette.asset");
+        var archer    = CreateOrLoad<EnemySO>("Assets/_Data/Enemies/ArcherSquelette.asset");
+        var golem     = CreateOrLoad<EnemySO>("Assets/_Data/Enemies/GolemOs.asset");
+        var roi       = CreateOrLoad<EnemySO>("Assets/_Data/Enemies/RoiSquelette.asset");
+
+        var village = CreateOrLoad<CampaignZoneSO>("Assets/_Data/Zones/Zone_Village.asset");
+        village.zoneName        = "Village de Départ";
+        village.sceneKey        = "Village";
+        village.flagKey         = "village_visited";
+        village.enemyPool       = new EnemySO[0];
+        village.boss            = null;
+        village.defaultBotBrain = botNormal;
+        EditorUtility.SetDirty(village);
+
+        var donjon = CreateOrLoad<CampaignZoneSO>("Assets/_Data/Zones/Zone_Donjon.asset");
+        donjon.zoneName            = "Donjon du Roi Squelette";
+        donjon.sceneKey            = "Donjon";
+        donjon.flagKey             = "donjon_visited";
+        donjon.bossDefeatedFlagKey = "boss_defeated";
+        donjon.enemyPool           = new[] { squelette, archer, golem };
+        donjon.boss                = roi;
+        donjon.defaultBotBrain     = botNormal;
+        EditorUtility.SetDirty(donjon);
+    }
+
+    // ─────────────────────────── GAME DATA REGISTRY ─────────────────────────
+
+    private static void CreateGameDataRegistry()
+    {
+        EnsureFolder("Assets/Resources");
+        var registry = CreateOrLoad<GameDataRegistry>("Assets/Resources/GameDataRegistry.asset");
+
+        var guerrier  = CreateOrLoad<ClassSO>("Assets/_Data/Classes/Guerrier.asset");
+        var mage      = CreateOrLoad<ClassSO>("Assets/_Data/Classes/Mage.asset");
+        var soigneur  = CreateOrLoad<ClassSO>("Assets/_Data/Classes/Soigneur.asset");
+        registry.classes = new[] { guerrier, mage, soigneur };
+
+        var humain      = CreateOrLoad<RaceSO>("Assets/_Data/Races/Humain.asset");
+        var elfe        = CreateOrLoad<RaceSO>("Assets/_Data/Races/Elfe.asset");
+        var lycanthrope = CreateOrLoad<RaceSO>("Assets/_Data/Races/Lycanthrope.asset");
+        registry.races = new[] { humain, elfe, lycanthrope };
+
+        var loup    = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/LoupDesOmbres.asset");
+        var corbeau = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/CorbeauAnalyste.asset");
+        var fee     = CreateOrLoad<CompanionSO>("Assets/_Data/Companions/FeeSylvestre.asset");
+        registry.companions = new[] { loup, corbeau, fee };
+
+        EditorUtility.SetDirty(registry);
     }
 }
 #endif
