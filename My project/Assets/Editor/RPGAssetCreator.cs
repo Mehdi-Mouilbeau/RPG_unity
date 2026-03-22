@@ -19,6 +19,7 @@ public static class RPGAssetCreator
         CreateBotBrains();
         CreateArenaRoster();
         CreateStarterEquipment();
+        CreateStarterSkillTrees();
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("RPG: All starter assets created successfully!");
@@ -33,6 +34,7 @@ public static class RPGAssetCreator
         EnsureFolder("Assets/_Data/AI");
         EnsureFolder("Assets/_Data/Arena");
         EnsureFolder("Assets/_Data/Equipment");
+        EnsureFolder("Assets/_Data/SkillTrees");
     }
 
     // ────────────────────────────── SKILLS ──────────────────────────────
@@ -311,6 +313,15 @@ public static class RPGAssetCreator
         return asset;
     }
 
+    private static T CreateOrLoad<T>(string path) where T : ScriptableObject
+    {
+        var existing = AssetDatabase.LoadAssetAtPath<T>(path);
+        if (existing != null) return existing;
+        var so = ScriptableObject.CreateInstance<T>();
+        AssetDatabase.CreateAsset(so, path);
+        return so;
+    }
+
     // ────────────────────────────── EQUIPMENT ───────────────────────────────
 
     private static void CreateStarterEquipment()
@@ -415,6 +426,46 @@ public static class RPGAssetCreator
         so.craftingGoldCost  = goldCost;
         so.effectPool        = effectPool;
         AssetDatabase.CreateAsset(so, path);
+    }
+    // ────────────────────────────── SKILL TREES ─────────────────────────────
+
+    private static void CreateStarterSkillTrees()
+    {
+        var tree = CreateOrLoad<SkillTreeSO>("Assets/_Data/SkillTrees/GuerrierSkillTree.asset");
+        tree.specAName = "Chevalier";
+        tree.specBName = "Berserker";
+        tree.nodes = new SkillNode[]
+        {
+            // ── Tronc commun (L1-10, 5 nœuds) ───────────────────────────────
+            new SkillNode { nodeId = "g_coup_puissant",     branch = SkillBranch.Common, pointCost = 1, unlockLevel = 1,  prerequisiteNodeIds = new string[0] },
+            new SkillNode { nodeId = "g_cri_de_guerre",     branch = SkillBranch.Common, pointCost = 1, unlockLevel = 2,  prerequisiteNodeIds = new[] { "g_coup_puissant" } },
+            new SkillNode { nodeId = "g_posture_de_garde",  branch = SkillBranch.Common, pointCost = 1, unlockLevel = 3,  prerequisiteNodeIds = new[] { "g_coup_puissant" } },
+            new SkillNode { nodeId = "g_attaque_en_chaine", branch = SkillBranch.Common, pointCost = 1, unlockLevel = 5,  prerequisiteNodeIds = new[] { "g_cri_de_guerre" } },
+            new SkillNode { nodeId = "g_endurance",         branch = SkillBranch.Common, pointCost = 1, unlockLevel = 7,  prerequisiteNodeIds = new[] { "g_posture_de_garde" } },
+
+            // ── Branche Chevalier (SpecA, L10-30, 8 nœuds) ──────────────────
+            new SkillNode { nodeId = "c_bouclier_sacre",    branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 10, prerequisiteNodeIds = new[] { "g_endurance" } },
+            new SkillNode { nodeId = "c_mur_de_fer",        branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 11, prerequisiteNodeIds = new[] { "c_bouclier_sacre" } },
+            new SkillNode { nodeId = "c_frappe_divine",     branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 12, prerequisiteNodeIds = new[] { "c_bouclier_sacre" } },
+            new SkillNode { nodeId = "c_benediction",       branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 14, prerequisiteNodeIds = new[] { "c_frappe_divine" } },
+            new SkillNode { nodeId = "c_aura_de_lumiere",   branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 16, prerequisiteNodeIds = new[] { "c_benediction" } },
+            new SkillNode { nodeId = "c_armure_sacree",     branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 18, prerequisiteNodeIds = new[] { "c_mur_de_fer" } },
+            new SkillNode { nodeId = "c_jugement",          branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 22, prerequisiteNodeIds = new[] { "c_aura_de_lumiere" } },
+            new SkillNode { nodeId = "c_paladin_divin",     branch = SkillBranch.SpecA,  pointCost = 1, unlockLevel = 27, prerequisiteNodeIds = new[] { "c_jugement", "c_armure_sacree" } },
+
+            // ── Branche Berserker (SpecB, L10-30, 8 nœuds) ──────────────────
+            new SkillNode { nodeId = "b_rage",              branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 10, prerequisiteNodeIds = new[] { "g_attaque_en_chaine" } },
+            new SkillNode { nodeId = "b_peau_epaisse",      branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 11, prerequisiteNodeIds = new[] { "b_rage" } },
+            new SkillNode { nodeId = "b_frenésie",          branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 12, prerequisiteNodeIds = new[] { "b_rage" } },
+            new SkillNode { nodeId = "b_cri_primitif",      branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 14, prerequisiteNodeIds = new[] { "b_frenésie" } },
+            new SkillNode { nodeId = "b_instinct_de_tueur", branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 16, prerequisiteNodeIds = new[] { "b_frenésie" } },
+            new SkillNode { nodeId = "b_pouls_de_guerre",   branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 18, prerequisiteNodeIds = new[] { "b_peau_epaisse" } },
+            new SkillNode { nodeId = "b_carnage",           branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 22, prerequisiteNodeIds = new[] { "b_instinct_de_tueur" } },
+            new SkillNode { nodeId = "b_avatar_du_chaos",   branch = SkillBranch.SpecB,  pointCost = 1, unlockLevel = 27, prerequisiteNodeIds = new[] { "b_carnage", "b_pouls_de_guerre" } },
+        };
+        EditorUtility.SetDirty(tree);
+        AssetDatabase.SaveAssets();
+        Debug.Log("[RPGAssetCreator] GuerrierSkillTree created.");
     }
 }
 #endif

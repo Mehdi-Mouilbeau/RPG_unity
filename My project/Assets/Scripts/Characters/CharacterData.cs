@@ -131,6 +131,9 @@ public class CharacterData
 
         if (classSO.startingSkills != null)
             Skills.AddRange(classSO.startingSkills);
+
+        if (classSO.skillTree != null)
+            InitSkillTree(classSO.skillTree);
     }
 
     public void TakeDamage(int amount)
