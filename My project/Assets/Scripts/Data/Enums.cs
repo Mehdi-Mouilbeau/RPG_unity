@@ -32,3 +32,5 @@ public enum CompanionEffectType
 }
 
 public enum CompanionTargetType { EnemySingle, AllEnemies, AllySingle, AllAllies }
+
+public enum ConsumableEffectType { HealHP, RestoreMP, CureStatus }
