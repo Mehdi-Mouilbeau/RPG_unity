@@ -62,4 +62,15 @@ public class GameDataRegistry : ScriptableObject
             if (c != null && c.companionName == key) return c;
         return null;
     }
+
+    [Header("Consumables")]
+    public ConsumableSO[] consumables;
+
+    public ConsumableSO GetConsumable(string key)
+    {
+        if (consumables == null || key == null) return null;
+        foreach (var c in consumables)
+            if (c != null && c.itemName == key) return c;
+        return null;
+    }
 }

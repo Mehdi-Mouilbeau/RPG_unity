@@ -17,4 +17,5 @@ public class SaveData
     // List instead of Dictionary because Dictionary is not serializable by JsonUtility
     public List<ProgressionFlags.FlagEntry> flags           = new List<ProgressionFlags.FlagEntry>();
     public List<string>                     equippedItemKeys = new List<string>();
+    public List<string>                     consumableKeys   = new List<string>();
 }
