@@ -103,12 +103,31 @@ public class BattleManager : MonoBehaviour
     {
         bool playersAllDead = _playerTeam.All(c => c.IsDead);
         bool enemiesAllDead = _enemyTeam.All(c => c.IsDead);
-        if (playersAllDead || enemiesAllDead)
+        if (!playersAllDead && !enemiesAllDead) return false;
+
+        int xp = 0;
+        var loot = new List<EquipmentSO>();
+
+        if (enemiesAllDead)
         {
-            EventBus.Publish(new BattleEndedEvent { PlayerWon = enemiesAllDead });
-            return true;
+            foreach (var enemy in _enemyTeam)
+            {
+                xp += enemy.XPReward;
+                if (enemy.SourceLootTable != null)
+                {
+                    var item = enemy.SourceLootTable.Roll();
+                    if (item != null) loot.Add(item);
+                }
+            }
         }
-        return false;
+
+        EventBus.Publish(new BattleEndedEvent
+        {
+            PlayerWon = enemiesAllDead,
+            XPGained  = xp,
+            Loot      = loot
+        });
+        return true;
     }
 
     public List<CharacterData> GetEnemyTeam() => _enemyTeam;
