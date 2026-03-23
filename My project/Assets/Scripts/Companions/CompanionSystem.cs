@@ -38,7 +38,13 @@ public static class CompanionSystem
 
         companion.Use(skill);
         result.Success = true;
-        EventBus.Publish(new CompanionActivatedEvent { Owner = user, Skill = skill, Target = primaryTarget });
+        EventBus.Publish(new CompanionActivatedEvent
+        {
+            Owner   = user,
+            Skill   = skill,
+            Target  = primaryTarget,
+            Message = result.Message
+        });
         return result;
     }
 
