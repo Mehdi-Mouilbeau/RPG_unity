@@ -26,3 +26,4 @@ public struct CompanionActivatedEvent
 public struct BossDefeatedEvent  { public EnemySO Boss; public CharacterData Player; }
 public struct BossPhaseEvent     { public int Phase; public CharacterData Boss; }
 public struct ZoneEnteredEvent   { public CampaignZoneSO Zone; }
+public struct ShopOpenedEvent { public ShopSO Shop; }
