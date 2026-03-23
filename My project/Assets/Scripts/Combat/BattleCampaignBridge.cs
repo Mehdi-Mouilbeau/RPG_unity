@@ -40,6 +40,8 @@ public class BattleCampaignBridge : MonoBehaviour
                 enemySO.atk, enemySO.def,
                 enemySO.mag, enemySO.res,
                 enemySO.agi, enemySO.lck);
+            enemy.XPReward        = enemySO.xpReward;
+            enemy.SourceLootTable = enemySO.lootTable;
             enemies.Add(enemy);
             brain = enemySO.botBrain ?? fallbackBotBrain;
         }
@@ -76,7 +78,6 @@ public class BattleCampaignBridge : MonoBehaviour
         {
             EventBus.Unsubscribe<BattleEndedEvent>(onEnd);
 
-            // Unsubscribe onTurn to avoid leaking the boss turn listener
             if (onTurn != null)
                 EventBus.Unsubscribe<TurnStartedEvent>(onTurn);
 
@@ -89,15 +90,11 @@ public class BattleCampaignBridge : MonoBehaviour
                     && !string.IsNullOrEmpty(encounter.Zone.bossDefeatedFlagKey))
                     session.Flags.Set(encounter.Zone.bossDefeatedFlagKey);
 
+                player.GainXP(evt.XPGained);
                 session.Save();
-                if (SceneLoader.Instance != null)
-                    SceneLoader.Instance.LoadScene("WorldMap");
+                // La transition de scène est maintenant gérée par VictoryScreenUI
             }
-            else
-            {
-                if (SceneLoader.Instance != null)
-                    SceneLoader.Instance.LoadScene("MainMenu");
-            }
+            // Pas de LoadScene en cas de défaite non plus — VictoryScreenUI s'en charge
         };
         EventBus.Subscribe<BattleEndedEvent>(onEnd);
     }
