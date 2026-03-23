@@ -18,8 +18,8 @@ public class ActionMenuUI : MonoBehaviour
 
     private void Start()
     {
-        attackButton.onClick.AddListener(OnAttackPressed);
-        passButton.onClick.AddListener(OnPassPressed);
+        if (attackButton   != null) attackButton.onClick.AddListener(OnAttackPressed);
+        if (passButton     != null) passButton.onClick.AddListener(OnPassPressed);
         if (skillsButton   != null) skillsButton.onClick.AddListener(OnSkillsPressed);
         if (itemsButton    != null) itemsButton.onClick.AddListener(OnItemsPressed);
         if (companionButton != null) companionButton.onClick.AddListener(OnCompanionPressed);
@@ -62,15 +62,17 @@ public class ActionMenuUI : MonoBehaviour
 
     private void OnAttackPressed()
     {
-        var enemies = BattleManager.Instance.GetAliveEnemies();
+        var bm = BattleManager.Instance;
+        if (bm == null) { SetMenuActive(false); return; }
+        var enemies = bm.GetAliveEnemies();
         if (enemies.Count > 0)
-            BattleManager.Instance.ExecuteAction(enemies[0]);
+            bm.ExecuteAction(enemies[0]);
         SetMenuActive(false);
     }
 
     private void OnPassPressed()
     {
-        BattleManager.Instance.Pass();
+        BattleManager.Instance?.Pass();
         SetMenuActive(false);
     }
 
