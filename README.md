@@ -1,6 +1,6 @@
 # RPG Unity
 
-Un RPG tactique au tour par tour développé avec Unity 6 et C#, prévu pour une sortie sur Steam.
+Un RPG tactique au tour par tour développé avec Unity 6 et C#.
 
 ## Aperçu
 
