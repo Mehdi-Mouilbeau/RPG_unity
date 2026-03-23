@@ -51,6 +51,9 @@ public class GameSession : MonoBehaviour
             if (kvp.Value != null) data.equippedItemKeys.Add(kvp.Value.itemName);
         }
 
+        foreach (var c in ActiveCharacter.Inventory.Consumables)
+            if (c != null) data.consumableKeys.Add(c.itemName);
+
         SaveSystem.Save(data);
     }
 
@@ -87,6 +90,12 @@ public class GameSession : MonoBehaviour
         {
             var eq = registry.GetEquipment(itemKey);
             if (eq != null) character.Inventory.Equip(eq);
+        }
+
+        foreach (var key in data.consumableKeys)
+        {
+            var consumable = registry.GetConsumable(key);
+            if (consumable != null) character.Inventory.AddConsumable(consumable);
         }
 
         SetActiveCharacter(character);
