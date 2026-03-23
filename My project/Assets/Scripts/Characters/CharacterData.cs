@@ -38,6 +38,12 @@ public class CharacterData
 
     // ── Progression ───────────────────────────────────────────────────────
     public int Experience { get; private set; }
+    /// <summary>XP accordé quand cet ennemi est vaincu. 0 pour les personnages joueurs.</summary>
+    public int XPReward;
+
+    /// <summary>Table de loot de cet ennemi. Null pour les personnages joueurs.</summary>
+    public LootTableSO SourceLootTable;
+
     public int SkillPoints { get; private set; }
 
     private SkillTreeState _skillTreeState;

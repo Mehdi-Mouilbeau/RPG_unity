@@ -14,6 +14,16 @@ public class Inventory
     /// <summary>Unequipped items stored in the bag.</summary>
     public List<EquipmentSO> Bag { get; } = new();
 
+    /// <summary>Objets consommables (potions, antidotes, etc.).</summary>
+    public List<ConsumableSO> Consumables { get; } = new List<ConsumableSO>();
+
+    public void AddConsumable(ConsumableSO c)
+    {
+        if (c != null) Consumables.Add(c);
+    }
+
+    public void RemoveConsumable(ConsumableSO c) => Consumables.Remove(c);
+
     private readonly CharacterData _owner;
 
     public Inventory(CharacterData owner) => _owner = owner;
