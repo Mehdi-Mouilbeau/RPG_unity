@@ -191,6 +191,9 @@ public class CharacterData
     /// <summary>Boost temporaire d'ATK (phase 2 boss). Non sauvegardé.</summary>
     public void AddBaseATKBonus(int amount) => _baseATK += amount;
 
+    /// <summary>Boost d'AGI (compagnon). Non sauvegardé.</summary>
+    public void AddAGIBonus(int amount) => _baseAGI += amount;
+
     /// <summary>Restores HP, MP, and experience directly without triggering game events. Used by SaveSystem on load.</summary>
     public void ApplyLoadedStats(int hp, int mp, int experience)
     {

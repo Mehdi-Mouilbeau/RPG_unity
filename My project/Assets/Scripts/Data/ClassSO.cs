@@ -36,4 +36,7 @@ public class ClassSO : ScriptableObject
 
     [Header("Arbre de compétences")]
     public SkillTreeSO skillTree;
+
+    [Header("Races compatibles (vide = toutes les races)")]
+    public RaceSO[] allowedRaces;
 }

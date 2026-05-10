@@ -16,12 +16,31 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4649a51b507b9943ae11c5d05d062e7, type: 2}
   - {fileID: 11400000, guid: f1c861a4545206a498261779981bb476, type: 2}
   - {fileID: 11400000, guid: f08b2c4f529aae2408cb0ab2f0e6ab37, type: 2}
+  - {fileID: 11400000, guid: 112073188f65c7a4f864ddb9bc48c750, type: 2}
+  - {fileID: 11400000, guid: dfe5caa7bda75114bad5d6d8d25b59bb, type: 2}
+  - {fileID: 11400000, guid: d260eda1726b61448aa98a695750fee5, type: 2}
+  - {fileID: 11400000, guid: 3d1185973f7040149aac6edcee566c2a, type: 2}
+  - {fileID: 11400000, guid: 0a36aa304b109c445a5fb5b0f3b934ad, type: 2}
+  - {fileID: 11400000, guid: 4538375bde0ea304faf5cb0b8563c7d9, type: 2}
+  - {fileID: 11400000, guid: b2d1771c8e7829441b0811fcdc8b70e5, type: 2}
   races:
   - {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}
   - {fileID: 11400000, guid: ac0cbda0f237ac04682947424697b992, type: 2}
-  - {fileID: 11400000, guid: 47919695b2492ae498088236cca4b1b7, type: 2}
+  - {fileID: 11400000, guid: c2ac493ee4082fe4e9437000337e2954, type: 2}
+  - {fileID: 11400000, guid: ffc07bf91dbb8f74f91b2543167a7c55, type: 2}
+  - {fileID: 11400000, guid: df6a1bca90e18fb4ea6231660dd7462d, type: 2}
+  - {fileID: 11400000, guid: 50bd7b06358b4dc4f808eb15d759ee47, type: 2}
+  - {fileID: 11400000, guid: 2c34f56980f4f8c4fa3a5977dbbac887, type: 2}
+  - {fileID: 11400000, guid: 4d341936fb4b9e64da3f09195473f5b8, type: 2}
+  - {fileID: 11400000, guid: 3ce0dfc5892be414fa0d7116b0bf14a7, type: 2}
+  - {fileID: 11400000, guid: e5a329482dac5924ba3cf71c86fe7a07, type: 2}
+  - {fileID: 11400000, guid: 552868b7aba020448aacfbf549e572c0, type: 2}
   equipment: []
   companions:
   - {fileID: 11400000, guid: 6a8bb9155929e0b4bbf4b626a727090b, type: 2}
   - {fileID: 11400000, guid: 2bc115bbb3feb424a87566a33511e345, type: 2}
   - {fileID: 11400000, guid: 8522adaf5cb090a438e6de7a8c5f6afe, type: 2}
+  consumables:
+  - {fileID: 11400000, guid: 135c3a062b477934f967f7bb82185c9e, type: 2}
+  - {fileID: 11400000, guid: 99f1e30f7a1a2c847895083f19db5b55, type: 2}
+  - {fileID: 11400000, guid: 49475c6115766da48b5855ba3abb34fa, type: 2}
