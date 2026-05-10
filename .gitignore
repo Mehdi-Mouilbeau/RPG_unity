@@ -20,7 +20,7 @@
 
 # Unity recovery scenes
 Assets/_Recovery/
-Assets/_Recovery.meta
+**/_Recovery.meta
 
 # Machine-specific MCP server config (contains absolute path to Library/)
 .mcp.json
