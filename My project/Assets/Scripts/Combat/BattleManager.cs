@@ -72,6 +72,19 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
+        // Confusion : redirige vers une cible aléatoire, attaque basique
+        if (source.HasStatus(StatusEffectType.Confusion))
+        {
+            var allAlive = _playerTeam.FindAll(c => !c.IsDead);
+            allAlive.AddRange(_enemyTeam.FindAll(c => !c.IsDead));
+            if (allAlive.Count > 0)
+            {
+                target = allAlive[Random.Range(0, allAlive.Count)];
+                skill = null;
+                Debug.Log($"{source.CharacterName} est confus et attaque {target.CharacterName} !");
+            }
+        }
+
         // Tick status effects — may kill characters (Burn/Poison)
         StatusManager.Tick(source);
         if (CheckBattleEnd()) return;

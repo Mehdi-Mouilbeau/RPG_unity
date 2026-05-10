@@ -29,9 +29,38 @@ public static class CompanionSystem
             case CompanionEffectType.RemoveStatuses:
                 ApplyRemoveStatuses(skill, primaryTarget, allies, result);
                 break;
+            case CompanionEffectType.BoostAgi:
+                if (primaryTarget != null && !primaryTarget.IsDead)
+                {
+                    primaryTarget.AddAGIBonus(skill.value);
+                    result.AffectedTargets = new[] { primaryTarget };
+                    result.Message = $"AGI de {primaryTarget.CharacterName} augmentée de {skill.value} !";
+                }
+                else
+                {
+                    result.AffectedTargets = new CharacterData[0];
+                    result.Message = "Aucune cible valide.";
+                }
+                break;
+
+            case CompanionEffectType.RevealInfo:
+                if (primaryTarget != null)
+                {
+                    string affinity = primaryTarget.ElementalAffinity == ElementType.None
+                        ? "Neutre"
+                        : primaryTarget.ElementalAffinity.ToString();
+                    result.AffectedTargets = new[] { primaryTarget };
+                    result.Message = $"{primaryTarget.CharacterName} — Affinité : {affinity}. HP : {primaryTarget.CurrentHP}/{primaryTarget.MaxHP}.";
+                }
+                else
+                {
+                    result.AffectedTargets = new CharacterData[0];
+                    result.Message = "Aucune cible à analyser.";
+                }
+                break;
+
             default:
-                // BoostAgi / RevealInfo: event-driven; mechanical effect handled by subscribers
-                result.AffectedTargets = primaryTarget != null ? new[] { primaryTarget } : new CharacterData[0];
+                result.AffectedTargets = new CharacterData[0];
                 result.Message = $"{skill.skillName} activé.";
                 break;
         }

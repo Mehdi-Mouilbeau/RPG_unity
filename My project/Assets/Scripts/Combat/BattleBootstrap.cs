@@ -11,6 +11,9 @@ public class BattleBootstrap : MonoBehaviour
 
     private void Start()
     {
+        // BattleCampaignBridge handles campaign battles — skip if a session is active
+        if (GameSession.Instance?.ActiveCharacter != null) return;
+
         var player = new CharacterData();
         player.InitializeFromSO("Héros", playerClass, playerRace, level: 1);
 

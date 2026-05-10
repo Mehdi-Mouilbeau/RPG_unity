@@ -20,11 +20,12 @@ public class BattleCampaignBridge : MonoBehaviour
         }
 
         var encounter = session.PendingEncounter;
-        var player    = session.ActiveCharacter;
 
-        if (player == null)
+        // Seuls les équipiers combattent — le perso principal reste sur la map
+        var allies = session.Party;
+        if (allies == null || allies.Count == 0)
         {
-            Debug.LogError("BattleCampaignBridge: ActiveCharacter est null.");
+            Debug.LogError("BattleCampaignBridge: aucun équipier dans session.Party.");
             return;
         }
 
@@ -46,8 +47,7 @@ public class BattleCampaignBridge : MonoBehaviour
             brain = enemySO.botBrain ?? fallbackBotBrain;
         }
 
-        BattleManager.Instance.StartBattle(
-            new List<CharacterData> { player }, enemies, brain);
+        BattleManager.Instance.StartBattle(allies, enemies, brain);
 
         // Si c'est un boss, initialiser BossController sur le premier ennemi
         CharacterData bossChar = null;
@@ -84,13 +84,20 @@ public class BattleCampaignBridge : MonoBehaviour
             if (evt.PlayerWon)
             {
                 if (encounter.IsBoss)
-                    EventBus.Publish(new BossDefeatedEvent { Player = player });
+                    EventBus.Publish(new BossDefeatedEvent { Player = allies[0] });
 
                 if (encounter.IsBoss && encounter.Zone != null
                     && !string.IsNullOrEmpty(encounter.Zone.bossDefeatedFlagKey))
                     session.Flags.Set(encounter.Zone.bossDefeatedFlagKey);
 
-                player.GainXP(evt.XPGained);
+                // Marquer un ennemi de scène comme vaincu (EnemyActor)
+                if (!string.IsNullOrEmpty(encounter.DefeatedFlagKey))
+                    session.Flags.Set(encounter.DefeatedFlagKey);
+
+                // XP distribuée à tous les équipiers
+                foreach (var member in session.Party)
+                    member.GainXP(evt.XPGained);
+
                 session.Save();
                 // La transition de scène est maintenant gérée par VictoryScreenUI
             }

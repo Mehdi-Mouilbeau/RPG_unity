@@ -41,6 +41,12 @@ public class EquipmentSO : ScriptableObject
     /// </summary>
     public string[] effectPool;
 
+    [Header("Restrictions (vide = tous)")]
+    /// <summary>Classes autorisées. Vide = accessible à toutes les classes.</summary>
+    public ClassSO[] allowedClasses;
+    /// <summary>Races autorisées. Vide = accessible à toutes les races.</summary>
+    public RaceSO[]  allowedRaces;
+
     // ── Effective stat helpers (apply rarity multiplier) ──────────────────
 
     public int EffectiveHP  => ApplyRarity(hpBonus);
