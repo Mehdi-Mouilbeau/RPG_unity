@@ -25,7 +25,10 @@ Assets/_Recovery/
 .mcp.json
 
 # Claude Code local settings (machine-specific overrides)
-.claude/settings.local.json
+**/.claude/settings.local.json
+
+# External asset packs (large binaries, not game source)
+asset à tier/
 
 # OS
 .DS_Store
