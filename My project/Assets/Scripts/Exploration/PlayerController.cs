@@ -6,14 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 4f;
 
-    private Rigidbody2D _rb;
-    private Vector2     _moveInput;
+    private Rigidbody2D    _rb;
+    private Vector2        _moveInput;
+    private PlayerAnimator _anim;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
-        _rb.gravityScale = 0f;
+        _rb   = GetComponent<Rigidbody2D>();
+        _rb.gravityScale  = 0f;
         _rb.freezeRotation = true;
+        _anim = GetComponent<PlayerAnimator>();
     }
 
     private void Update()
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
             _moveInput.x -= 1f;
         if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
             _moveInput.x += 1f;
+
+        if (_anim != null) _anim.UpdateAnimation(_moveInput);
     }
 
     private void FixedUpdate()

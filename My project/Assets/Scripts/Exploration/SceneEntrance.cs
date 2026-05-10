@@ -26,7 +26,12 @@ public class SceneEntrance : MonoBehaviour
         }
 
         if (string.IsNullOrEmpty(targetScene)) { Debug.LogWarning("[SceneEntrance] targetScene non configuré"); return; }
-        if (SceneLoader.Instance == null) { Debug.LogError("[SceneEntrance] SceneLoader.Instance est null"); return; }
+        if (SceneLoader.Instance == null)
+        {
+            // Fallback : chargement direct (mode test sans MainMenu)
+            UnityEngine.SceneManagement.SceneManager.LoadScene(targetScene);
+            return;
+        }
 
         SceneLoader.Instance.LoadScene(targetScene);
     }

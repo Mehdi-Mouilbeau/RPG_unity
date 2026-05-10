@@ -25,17 +25,20 @@ public class MainMenuUI : MonoBehaviour
     {
         SaveSystem.Delete();
         if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("CharacterSelect");
+        else UnityEngine.SceneManagement.SceneManager.LoadScene("CharacterSelect");
     }
 
     private void OnContinue()
     {
         if (GameSession.Instance != null) GameSession.Instance.Load();
         if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("WorldMap");
+        else UnityEngine.SceneManagement.SceneManager.LoadScene("WorldMap");
     }
 
     private void OnArena()
     {
         if (SceneLoader.Instance != null) SceneLoader.Instance.LoadScene("Arena");
+        else UnityEngine.SceneManagement.SceneManager.LoadScene("Arena");
     }
 
     private void OnQuit()

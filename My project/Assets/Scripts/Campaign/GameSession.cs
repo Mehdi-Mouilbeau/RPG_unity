@@ -9,10 +9,11 @@ public class GameSession : MonoBehaviour
 {
     public static GameSession Instance { get; private set; }
 
-    public CharacterData      ActiveCharacter  { get; private set; }
-    public ProgressionFlags   Flags            { get; } = new ProgressionFlags();
-    public int                Gold             { get; set; }
-    public CampaignEncounter  PendingEncounter { get; set; } // rencontre en attente (combat)
+    public CharacterData        ActiveCharacter  { get; private set; }
+    public List<CharacterData>  Party            { get; private set; } = new();
+    public ProgressionFlags     Flags            { get; } = new ProgressionFlags();
+    public int                  Gold             { get; set; }
+    public CampaignEncounter    PendingEncounter { get; set; } // rencontre en attente (combat)
 
     private void Awake()
     {
@@ -24,6 +25,11 @@ public class GameSession : MonoBehaviour
     public void SetActiveCharacter(CharacterData character)
     {
         ActiveCharacter = character;
+    }
+
+    public void SetParty(List<CharacterData> party)
+    {
+        Party = party ?? new List<CharacterData>();
     }
 
     // ── Sauvegarde ─────────────────────────────────────────────────────────
@@ -53,6 +59,20 @@ public class GameSession : MonoBehaviour
 
         foreach (var c in ActiveCharacter.Inventory.Consumables)
             if (c != null) data.consumableKeys.Add(c.itemName);
+
+        foreach (var member in Party)
+        {
+            data.party.Add(new PartyMemberSaveData
+            {
+                characterName = member.CharacterName,
+                classKey      = member.Class?.className ?? "",
+                raceKey       = member.Race?.raceName  ?? "",
+                level         = member.Level,
+                experience    = member.Experience,
+                currentHP     = member.CurrentHP,
+                currentMP     = member.CurrentMP,
+            });
+        }
 
         SaveSystem.Save(data);
     }
@@ -99,6 +119,21 @@ public class GameSession : MonoBehaviour
         }
 
         SetActiveCharacter(character);
+
+        // Charger l'équipe de combat
+        var loadedParty = new List<CharacterData>();
+        foreach (var memberData in data.party)
+        {
+            var mClass = registry.GetClass(memberData.classKey);
+            var mRace  = registry.GetRace(memberData.raceKey);
+            if (mClass == null || mRace == null) continue;
+
+            var member = new CharacterData();
+            member.InitializeFromSO(memberData.characterName, mClass, mRace, memberData.level);
+            member.ApplyLoadedStats(memberData.currentHP, memberData.currentMP, memberData.experience);
+            loadedParty.Add(member);
+        }
+        SetParty(loadedParty);
     }
 
     // ── Personnages prédéfinis ──────────────────────────────────────────────

@@ -18,6 +18,7 @@ public class SceneLoader : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         if (fadeImage == null) Debug.LogError("[SceneLoader] fadeImage non assigné dans l'Inspector!");
+        else fadeImage.gameObject.SetActive(false); // ne bloque pas les clics au démarrage
     }
 
     public void LoadScene(string sceneName)
@@ -29,11 +30,13 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator FadeAndLoad(string sceneName)
     {
         _isLoading = true;
+        fadeImage.gameObject.SetActive(true);
         // Fondu au noir
         yield return StartCoroutine(Fade(0f, 1f));
         yield return SceneManager.LoadSceneAsync(sceneName);
         // Fondu depuis le noir
         yield return StartCoroutine(Fade(1f, 0f));
+        fadeImage.gameObject.SetActive(false); // désactivé = ne bloque plus les clics
         _isLoading = false;
     }
 
