@@ -12,10 +12,20 @@
 .idea/
 *.csproj
 *.sln
+*.slnx
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
+
+# Unity recovery scenes
+Assets/_Recovery/
+
+# Machine-specific MCP server config (contains absolute path to Library/)
+.mcp.json
+
+# Claude Code local settings (machine-specific overrides)
+.claude/settings.local.json
 
 # OS
 .DS_Store
