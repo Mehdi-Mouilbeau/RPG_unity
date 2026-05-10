@@ -67,13 +67,11 @@ public class ActionMenuUI : MonoBehaviour
         var enemies = bm.GetAliveEnemies();
         if (enemies.Count > 0)
             bm.ExecuteAction(enemies[0]);
-        SetMenuActive(false);
     }
 
     private void OnPassPressed()
     {
         BattleManager.Instance?.Pass();
-        SetMenuActive(false);
     }
 
     private void OnSkillsPressed()
