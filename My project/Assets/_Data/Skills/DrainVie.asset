@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2370f80426b604249a16e3e2ab61a8be, type: 3}
+  m_Name: DrainVie
+  m_EditorClassIdentifier: RPG.Runtime::SkillSO
+  skillName: Drain de Vie
+  description: "Aspire l'\xE9nergie vitale de l'ennemi avec les t\xE9n\xE8bres."
+  damageType: 1
+  targetType: 0
+  element: 6
+  mpCost: 10
+  cooldownTurns: 1
+  powerMultiplier: 1
+  statusEffect: 0
+  statusChance: 0

@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20d31675bc48f9140b28db8e9034ab28, type: 3}
-  m_Name: Lycanthrope
+  m_Name: ColossesDepPierre
   m_EditorClassIdentifier: RPG.Runtime::RaceSO
-  raceName: 
-  description: 
-  hpModifier: 0
+  raceName: Colosses de Pierre
+  description: "Incroyablement r\xE9sistants mais lents. Provoquent naturellement
+    les ennemis."
+  hpModifier: 0.1
   mpModifier: 0
   atkModifier: 0
-  defModifier: 0
+  defModifier: 0.25
   magModifier: 0
   resModifier: 0
-  agiModifier: 0
+  agiModifier: -0.1
   lckModifier: 0
   elementalAffinity: 0
   statusImmunities: 
-  passiveDescription: 
+  passiveDescription: +25% DEF, -10% AGI, provocation passive

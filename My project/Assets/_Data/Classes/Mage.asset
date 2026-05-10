@@ -16,7 +16,7 @@ MonoBehaviour:
   role: 0
   description: "Lanceur de sorts \xE9l\xE9mentaires. Sp\xE9: \xC9l\xE9mentaliste
     / Arcaniste."
-  baseHP: 70
+  baseHP: 120
   baseMP: 80
   baseATK: 5
   baseDEF: 6
@@ -24,7 +24,7 @@ MonoBehaviour:
   baseRES: 12
   baseAGI: 11
   baseLCK: 8
-  hpGrowth: 10
+  hpGrowth: 16
   mpGrowth: 12
   atkGrowth: 1
   defGrowth: 1
@@ -37,3 +37,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
   - {fileID: 11400000, guid: 4dd2fdd74d6bae74b91b2d8a428306d6, type: 2}
   - {fileID: 11400000, guid: f80da9ee6ecb34c46b5550ae491fef3f, type: 2}
+  - {fileID: 11400000, guid: a17e9910030888544b3a44f83261aa29, type: 2}
+  skillTree: {fileID: 0}
+  allowedRaces:
+  - {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}
+  - {fileID: 11400000, guid: 4d341936fb4b9e64da3f09195473f5b8, type: 2}

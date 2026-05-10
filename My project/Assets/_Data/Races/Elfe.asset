@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d31675bc48f9140b28db8e9034ab28, type: 3}
   m_Name: Elfe
   m_EditorClassIdentifier: RPG.Runtime::RaceSO
-  raceName: 
-  description: 
-  hpModifier: 0
-  mpModifier: 0
+  raceName: Elfe
+  description: "Gracieux et ma\xEEtres des arts arcanes. Insaisissables au combat,\
+    \ ils frappent avant l\x27ennemi et r\xE9sistent \xE0 la confusion mentale."
+  hpModifier: -0.1
+  mpModifier: 0.1
   atkModifier: 0
-  defModifier: 0
-  magModifier: 0
-  resModifier: 0
-  agiModifier: 0
-  lckModifier: 0
-  elementalAffinity: 0
-  statusImmunities: 
-  passiveDescription: 
+  defModifier: -0.05
+  magModifier: 0.1
+  resModifier: 0.05
+  agiModifier: 0.15
+  lckModifier: 0.1
+  elementalAffinity: 2
+  statusImmunities: 05000000
+  passiveDescription: "+15% AGI, +10% MAG, +10% MP, -10% HP, -5% DEF, immunit\xE9\
+    \ Confusion. Esquive de base augment\xE9e."

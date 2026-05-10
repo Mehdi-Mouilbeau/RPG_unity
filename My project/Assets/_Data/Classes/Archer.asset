@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
-  m_Name: Soigneur
+  m_Name: Archer
   m_EditorClassIdentifier: RPG.Runtime::ClassSO
-  className: Soigneur
-  role: 2
-  description: "Soutien vital, soins et r\xE9surrection. Sp\xE9: Pr\xEAtre / Chaman."
+  className: Archer
+  role: 0
+  description: "Snipe \xE0 distance et debuffs. Sp\xE9: Chasseur / R\xF4deur."
   baseHP: 160
-  baseMP: 100
-  baseATK: 7
+  baseMP: 60
+  baseATK: 13
   baseDEF: 8
-  baseMAG: 14
-  baseRES: 14
-  baseAGI: 8
-  baseLCK: 7
+  baseMAG: 6
+  baseRES: 7
+  baseAGI: 14
+  baseLCK: 9
   hpGrowth: 20
-  mpGrowth: 15
-  atkGrowth: 1
-  defGrowth: 2
-  magGrowth: 3
-  resGrowth: 2
-  agiGrowth: 1
+  mpGrowth: 8
+  atkGrowth: 3
+  defGrowth: 1
+  magGrowth: 1
+  resGrowth: 1
+  agiGrowth: 2
   lckGrowth: 1
-  elementalAffinity: 5
+  elementalAffinity: 2
   startingSkills:
   - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
-  - {fileID: 11400000, guid: 6b463ad9dfc114e4cb43cd6881d607dd, type: 2}
-  - {fileID: 11400000, guid: e0b03c3ee206b404c827c4b6eefa19e5, type: 2}
-  - {fileID: 11400000, guid: a50477c872d2a9b4a85d7ce97b53d176, type: 2}
+  - {fileID: 11400000, guid: 748038f4ab829b9468b828d2babd3dd2, type: 2}
+  - {fileID: 11400000, guid: 02a5b467e8db3024caa10f5a92a71840, type: 2}
+  - {fileID: 11400000, guid: 76f8c84f752739e45a77b6bd0a1aa591, type: 2}
   skillTree: {fileID: 0}
   allowedRaces:
+  - {fileID: 11400000, guid: ac0cbda0f237ac04682947424697b992, type: 2}
   - {fileID: 11400000, guid: df6a1bca90e18fb4ea6231660dd7462d, type: 2}
-  - {fileID: 11400000, guid: 2c34f56980f4f8c4fa3a5977dbbac887, type: 2}

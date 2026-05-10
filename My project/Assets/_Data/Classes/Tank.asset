@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
+  m_Name: Tank
+  m_EditorClassIdentifier: RPG.Runtime::ClassSO
+  className: Tank
+  role: 1
+  description: "Provocation et absorption de d\xE9g\xE2ts. Sp\xE9: Gardien / Paladin
+    Noir."
+  baseHP: 260
+  baseMP: 40
+  baseATK: 10
+  baseDEF: 18
+  baseMAG: 5
+  baseRES: 15
+  baseAGI: 5
+  baseLCK: 5
+  hpGrowth: 36
+  mpGrowth: 5
+  atkGrowth: 2
+  defGrowth: 4
+  magGrowth: 1
+  resGrowth: 3
+  agiGrowth: 0
+  lckGrowth: 1
+  elementalAffinity: 0
+  startingSkills:
+  - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
+  - {fileID: 11400000, guid: 7e630b0e431f005448c0015af0e3bd20, type: 2}
+  - {fileID: 11400000, guid: d3e1f102d20422747be56cb5281e704d, type: 2}
+  - {fileID: 11400000, guid: 7d1829bcb38028643acb55ee9a0e72ef, type: 2}
+  skillTree: {fileID: 0}
+  allowedRaces:
+  - {fileID: 11400000, guid: 552868b7aba020448aacfbf549e572c0, type: 2}
+  - {fileID: 11400000, guid: 2c34f56980f4f8c4fa3a5977dbbac887, type: 2}
+  - {fileID: 0}

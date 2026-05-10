@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94e1bb8636ff0643b12a24feb33f2d7, type: 3}
+  m_Name: BoutiqueArmes
+  m_EditorClassIdentifier: RPG.Runtime::ShopSO
+  shopName: Marchand d'armes
+  equipmentItems:
+  - item: {fileID: 11400000, guid: 4cc5696e1760d0f4ab7e5245085018ae, type: 2}
+    price: 10
+  - item: {fileID: 11400000, guid: 7f1240344c400be41a5c73c1b5845b8b, type: 2}
+    price: 50
+  - item: {fileID: 11400000, guid: 095155cced2ccd04bad07132dcbf4d4a, type: 2}
+    price: 30
+  - item: {fileID: 11400000, guid: b1ce6c9da1e9a5e4fb10783402430542, type: 2}
+    price: 10
+  - item: {fileID: 11400000, guid: 38a35cfebde39ff4ca4b4a90e908cf92, type: 2}
+    price: 20
+  - item: {fileID: 11400000, guid: 1db55361351820c4aa406f72a84abf96, type: 2}
+    price: 40
+  - item: {fileID: 11400000, guid: dca84b6cf6c2012478a32cc9bf197747, type: 2}
+    price: 30
+  - item: {fileID: 11400000, guid: 62546850911b9214d99fa2f92d90dc1d, type: 2}
+    price: 15
+  - item: {fileID: 11400000, guid: 644eeca6a9734a446b983d3fd2dc2e72, type: 2}
+    price: 15
+  consumableItems: []

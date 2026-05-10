@@ -10,34 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
-  m_Name: Guerrier
+  m_Name: Voleur
   m_EditorClassIdentifier: RPG.Runtime::ClassSO
-  className: Guerrier
+  className: Voleur
   role: 0
-  description: "Combattant physique robuste. Sp\xE9: Berserker / Chevalier."
-  baseHP: 210
-  baseMP: 30
-  baseATK: 14
-  baseDEF: 12
+  description: "Ma\xEEtre du critique, du poison et de l'esquive. Sp\xE9: Assassin
+    / Filou."
+  baseHP: 150
+  baseMP: 50
+  baseATK: 12
+  baseDEF: 7
   baseMAG: 5
-  baseRES: 8
-  baseAGI: 9
-  baseLCK: 6
-  hpGrowth: 28
-  mpGrowth: 4
-  atkGrowth: 3
-  defGrowth: 2
+  baseRES: 6
+  baseAGI: 16
+  baseLCK: 12
+  hpGrowth: 18
+  mpGrowth: 6
+  atkGrowth: 2
+  defGrowth: 1
   magGrowth: 1
   resGrowth: 1
-  agiGrowth: 1
-  lckGrowth: 1
+  agiGrowth: 3
+  lckGrowth: 2
   elementalAffinity: 0
   startingSkills:
   - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
-  - {fileID: 11400000, guid: 082b70cbc8dd69844b156caf7177044d, type: 2}
-  - {fileID: 11400000, guid: 9877e4537d070ab4586a1fd993225312, type: 2}
-  - {fileID: 11400000, guid: 80ba970b63aae044b8bed086efdee285, type: 2}
+  - {fileID: 11400000, guid: cd81884a3898968479c7b383f27b3ba2, type: 2}
+  - {fileID: 11400000, guid: 33e8d4d8888bff248ab2ea6286f0e5ec, type: 2}
+  - {fileID: 11400000, guid: a5891eb568815804cbc4df6fb4853f58, type: 2}
   skillTree: {fileID: 0}
   allowedRaces:
-  - {fileID: 11400000, guid: c69d24f0be70a0543831071daa394a20, type: 2}
+  - {fileID: 11400000, guid: c2ac493ee4082fe4e9437000337e2954, type: 2}
   - {fileID: 11400000, guid: e5a329482dac5924ba3cf71c86fe7a07, type: 2}

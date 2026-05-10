@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94e1bb8636ff0643b12a24feb33f2d7, type: 3}
+  m_Name: BoutiqueApothicaire
+  m_EditorClassIdentifier: RPG.Runtime::ShopSO
+  shopName: Apothicaire
+  equipmentItems: []
+  consumableItems:
+  - item: {fileID: 11400000, guid: 135c3a062b477934f967f7bb82185c9e, type: 2}
+    price: 50
+  - item: {fileID: 11400000, guid: 99f1e30f7a1a2c847895083f19db5b55, type: 2}
+    price: 30
+  - item: {fileID: 11400000, guid: 49475c6115766da48b5855ba3abb34fa, type: 2}
+    price: 40

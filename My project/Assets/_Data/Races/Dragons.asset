@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20d31675bc48f9140b28db8e9034ab28, type: 3}
+  m_Name: Dragons
+  m_EditorClassIdentifier: RPG.Runtime::RaceSO
+  raceName: Dragons
+  description: "Puissants guerriers dot\xE9s d'un souffle \xE9l\xE9mentaire."
+  hpModifier: 0
+  mpModifier: 0
+  atkModifier: 0.1
+  defModifier: 0
+  magModifier: 0
+  resModifier: 0.1
+  agiModifier: 0
+  lckModifier: 0
+  elementalAffinity: 1
+  statusImmunities: 
+  passiveDescription: "+10% ATK, +10% RES, souffle \xE9l\xE9mentaire 1\xD7/combat"

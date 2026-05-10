@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a22c28179823a4fbccbf54f877ce9a, type: 3}
+  m_Name: Ingenieur
+  m_EditorClassIdentifier: RPG.Runtime::ClassSO
+  className: "Ing\xE9nieur"
+  role: 0
+  description: "D\xE9ploie tourelles, bombes et drones technologiques. Sp\xE9: M\xE9canicien
+    / Alchimiste."
+  baseHP: 165
+  baseMP: 70
+  baseATK: 9
+  baseDEF: 10
+  baseMAG: 11
+  baseRES: 8
+  baseAGI: 10
+  baseLCK: 8
+  hpGrowth: 21
+  mpGrowth: 10
+  atkGrowth: 2
+  defGrowth: 2
+  magGrowth: 2
+  resGrowth: 1
+  agiGrowth: 1
+  lckGrowth: 1
+  elementalAffinity: 3
+  startingSkills:
+  - {fileID: 11400000, guid: 97e7f82497a3239438a824f509d972b2, type: 2}
+  - {fileID: 11400000, guid: 74115fd3057e16046b498fa878baf347, type: 2}
+  - {fileID: 11400000, guid: bfb0457a5073b334d859361a1d185080, type: 2}
+  - {fileID: 11400000, guid: 5be711d52c435fb4daa83190cf1a3994, type: 2}
+  skillTree: {fileID: 0}
+  allowedRaces:
+  - {fileID: 11400000, guid: c2ac493ee4082fe4e9437000337e2954, type: 2}
+  - {fileID: 11400000, guid: ffc07bf91dbb8f74f91b2543167a7c55, type: 2}
