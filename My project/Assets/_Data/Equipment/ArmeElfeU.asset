@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: ArmeElfeU
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: Arc Sylvestre
+  description: "Arc taill\xE9 dans le c\u0153ur d'un ch\xEAne mill\xE9naire elfique."
+  slot: 0
+  rarity: 1
+  hpBonus: 0
+  mpBonus: 0
+  atkBonus: 12
+  defBonus: 0
+  magBonus: 10
+  resBonus: 0
+  agiBonus: 10
+  lckBonus: 5
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - BoisSacre
+  craftingGoldCost: 210
+  effectPool:
+  - atk_5
+  - mag_4
+  - agi_6
+  - crit_8
+  allowedClasses: []
+  allowedRaces:
+  - {fileID: 11400000, guid: ac0cbda0f237ac04682947424697b992, type: 2}

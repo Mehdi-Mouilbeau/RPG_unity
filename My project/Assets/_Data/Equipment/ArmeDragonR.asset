@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: ArmeDragonR
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: Griffe du Dragon
+  description: "Griffe naturelle d'un dragon. D\xE9chire tout sur son passage."
+  slot: 0
+  rarity: 2
+  hpBonus: 10
+  mpBonus: 0
+  atkBonus: 24
+  defBonus: 0
+  magBonus: 14
+  resBonus: 0
+  agiBonus: 0
+  lckBonus: 0
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - EcailleDragon
+  - OsRares
+  craftingGoldCost: 350
+  effectPool:
+  - atk_10
+  - mag_6
+  - damage_on_hit
+  - crit_8
+  allowedClasses: []
+  allowedRaces:
+  - {fileID: 11400000, guid: 2c34f56980f4f8c4fa3a5977dbbac887, type: 2}

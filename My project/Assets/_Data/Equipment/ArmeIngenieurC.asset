@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: ArmeIngenieurC
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: "Pistolet \xE0 Vapeur"
+  description: "Arme \xE0 feu m\xE9canique propulsant des projectiles \xE0 grande
+    vitesse."
+  slot: 0
+  rarity: 0
+  hpBonus: 0
+  mpBonus: 0
+  atkBonus: 14
+  defBonus: 0
+  magBonus: 8
+  resBonus: 0
+  agiBonus: 6
+  lckBonus: 0
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - FerBrut
+  - PiecesMecaniques
+  craftingGoldCost: 130
+  effectPool:
+  - atk_5
+  - mag_4
+  - agi_4
+  allowedClasses:
+  - {fileID: 11400000, guid: 4538375bde0ea304faf5cb0b8563c7d9, type: 2}
+  allowedRaces: []

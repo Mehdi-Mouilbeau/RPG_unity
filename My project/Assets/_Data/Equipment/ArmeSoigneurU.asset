@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: ArmeSoigneurU
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: "Sceptre de Lumi\xE8re"
+  description: "Rayonne d'une lumi\xE8re sacr\xE9e. Soins renforc\xE9s."
+  slot: 0
+  rarity: 1
+  hpBonus: 20
+  mpBonus: 30
+  atkBonus: 0
+  defBonus: 0
+  magBonus: 18
+  resBonus: 14
+  agiBonus: 0
+  lckBonus: 5
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - PierreGemme
+  - EssenceSacree
+  craftingGoldCost: 230
+  effectPool:
+  - mag_8
+  - mp_regen
+  - res_6
+  allowedClasses:
+  - {fileID: 11400000, guid: f08b2c4f529aae2408cb0ab2f0e6ab37, type: 2}
+  allowedRaces: []

@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45bc93f461705724fbcef8152925b13b, type: 3}
+  m_Name: ArmeArcherC
+  m_EditorClassIdentifier: RPG.Runtime::EquipmentSO
+  itemName: "Arc de Pr\xE9cision"
+  description: "Arc calibr\xE9 pour des tirs longs et pr\xE9cis."
+  slot: 0
+  rarity: 0
+  hpBonus: 0
+  mpBonus: 0
+  atkBonus: 16
+  defBonus: 0
+  magBonus: 0
+  resBonus: 0
+  agiBonus: 8
+  lckBonus: 6
+  rarityEffects: []
+  enchantmentEffect:
+    effectId: 
+    displayName: 
+    effectType: 0
+    element: 0
+    value: 0
+  craftingMaterials:
+  - BoisDur
+  - NerfAnimal
+  craftingGoldCost: 120
+  effectPool:
+  - atk_5
+  - agi_4
+  - crit_8
+  allowedClasses:
+  - {fileID: 11400000, guid: d260eda1726b61448aa98a695750fee5, type: 2}
+  allowedRaces: []
